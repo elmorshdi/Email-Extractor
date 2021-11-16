@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="@string/title_subject"
+        app:iconSpaceReserved="false">
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="@string/key_auto_add_subject"
+            android:summary="@string/summary_auto_subject"
+            android:title="@string/title_auto_add_subject"
+            app:iconSpaceReserved="false" />
+        <EditTextPreference
+            android:dependency="@string/key_auto_add_subject"
+            android:defaultValue="@string/defValue_subject"
+            android:key="@string/key_add_subject"
+            android:title="@string/title_add_subject"
+            app:dialogTitle="@string/title_dialog_add_Subject"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:dependency="@string/key_auto_add_subject"
+            android:dialogTitle="@string/title_dialog_select_msg"
+            android:key="@string/key_select_subject"
+            android:title="@string/title_select_subject"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/title_msg"
+        app:iconSpaceReserved="false">
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="@string/key_auto_add_msg"
+            android:summary="@string/summary_auto_msg"
+            android:title="@string/title_Auto_add_msg"
+            app:iconSpaceReserved="false" />
+        <EditTextPreference
+            android:dependency="@string/key_auto_add_msg"
+            android:defaultValue="@string/defValue_msg"
+            android:key="@string/key_add_msg"
+            android:title="@string/title_add_msg"
+            app:dialogTitle="@string/title_dialog_add_msg"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:dependency="@string/key_auto_add_msg"
+            android:dialogTitle="@string/title_dialog_select_msg"
+            android:key="@string/key_select_msg"
+            android:title="@string/title_select_msg"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

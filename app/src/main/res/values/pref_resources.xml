@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Settings Page -->
+
+    <string name="title_subject">Subject</string>
+    <string name="title_select_subject">Select Subject</string>
+    <string name="title_add_subject">Add Subject</string>
+    <string name="title_auto_add_subject">Auto Add Subject</string>
+    <string name="title_msg">Message</string>
+    <string name="title_select_msg">Select Message</string>
+    <string name="title_add_msg">Add Message</string>
+    <string name="title_Auto_add_msg">Auto Add Message</string>
+
+    <string name="key_subject_array">key_subject_array</string>
+    <string name="key_subject">key_subject</string>
+    <string name="key_select_subject">key_select_subject</string>
+    <string name="key_add_subject">key_add_subject</string>
+    <string name="key_auto_add_subject">key_auto_add_subject</string>
+    <string name="key_auto_subject">key_auto_subject</string>
+
+    <string name="key_msg_array">key_msg_array</string>
+    <string name="key_msg">key_msg</string>
+    <string name="key_select_msg">key_select_msg</string>
+    <string name="key_add_msg">key_add_msg</string>
+    <string name="key_auto_add_msg">key_auto_add_msg</string>
+    <string name="key_auto_msg">key_auto_msg</string>
+
+    <string name="title_dialog_select_msg">Select Message</string>
+    <string name="title_dialog_select_subject">Select Subject</string>
+    <string name="title_dialog_add_Subject">Add Subject</string>
+    <string name="title_dialog_add_msg">Add Message</string>
+
+    <string name="summary_auto_subject">Automatically Add Subject to Mail</string>
+    <string name="summary_auto_msg">Automatically Add Message to Mail</string>
+
+    <string name="defValue_subject">Subject</string>
+    <string name="defValue_msg">Message</string>
+
+
+
+
+
+
+
+
+
+
+</resources>
