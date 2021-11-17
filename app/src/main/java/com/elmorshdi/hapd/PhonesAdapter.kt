@@ -1,6 +1,6 @@
 package com.elmorshdi.hapd;
 
-import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -10,27 +10,12 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.core.content.ContextCompat.startActivity
 
-import android.content.pm.PackageManager
-
-import android.content.pm.PackageInfo
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.content.ContextCompat.startActivity
-import android.widget.Toast
-
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.content.ContextCompat.startActivity
-
-import androidx.core.app.ActivityCompat
-import java.net.URLEncoder
-import androidx.core.content.ContextCompat.startActivity
+import pub.devrel.easypermissions.EasyPermissions
 import java.lang.Exception
 
 
-class PhonesAdapter(private val list: List<String>, private val context: Context) : RecyclerView.Adapter<PhoneViewHolder>() {
+class PhonesAdapter(private val list: List<String>, private val context: Context, private val activity: Activity) : RecyclerView.Adapter<PhoneViewHolder>() {
 
 
 
@@ -42,7 +27,7 @@ class PhonesAdapter(private val list: List<String>, private val context: Context
 
     override fun onBindViewHolder(holder: PhoneViewHolder, position: Int) {
         val item: String = list[position]
-        holder.bind(item,context)
+        holder.bind(item,context,activity)
     }
 
     override fun getItemCount(): Int = list.size
@@ -63,7 +48,7 @@ class PhoneViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     }
 
-    fun bind(item: String, contexts: Context) {
+    fun bind(item: String, contexts: Context, activity: Activity?) {
         phoneNum?.text = item
         val phone="2$item"
 
@@ -80,10 +65,20 @@ class PhoneViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         btCall?.setOnClickListener(View.OnClickListener {
             val intent = Intent(Intent.ACTION_CALL)
              intent.data = Uri.parse("tel:" + phone)
-//            if (ActivityCompat.checkSelfPermission(contexts, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)
-            contexts.startActivity(intent)
+            if (Utility.hasPermissions(contexts)) {
+                contexts.startActivity(intent)}
+
+
+            EasyPermissions.requestPermissions(
+                activity!!,
+                "You need to accept  permissions to use this app",
+                0,
+                android.Manifest.permission.CALL_PHONE
+
+            )
 
         })
+
     }
 
 }

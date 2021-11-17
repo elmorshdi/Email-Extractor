@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/sendFragment"
         android:name="com.elmorshdi.hapd.SendFragment"
-        android:label="fragment_send"
+        android:label="Welcome"
         tools:layout="@layout/fragment_send" >
         <action
             android:id="@+id/action_sendFragment_to_settingsFragment"
@@ -18,5 +18,9 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.elmorshdi.hapd.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="Settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_sendFragment"
+            app:destination="@id/sendFragment" />
+    </fragment>
 </navigation>

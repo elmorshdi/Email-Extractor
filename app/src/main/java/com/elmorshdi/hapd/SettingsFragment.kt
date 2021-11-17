@@ -4,8 +4,10 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
@@ -16,7 +18,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private lateinit var msgList: ListPreference
     private lateinit var pref: SharedPreferences
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
+
         fillListPreference(subjectList, getArray(R.string.key_subject_array.toString()))
 
         fillListPreference(msgList, getArray(R.string.key_msg_array.toString()))
@@ -32,7 +36,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val addSubject = findPreference<EditTextPreference>(getString(R.string.key_add_subject))
         addSubject?.setOnPreferenceChangeListener { _, newValue ->
             val newSub = newValue as String
-            var subjectArray: Array<CharSequence> = getArray(R.string.key_subject_array.toString())
+            var subjectArray: MutableSet<String> = getArray(R.string.key_subject_array.toString())
             if (subjectArray.contains(newSub)) {
                 Toast.makeText(
                     requireContext(), "This Subject already exists, please select from below",
@@ -41,7 +45,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
                 false   // false: reject the new value.
             } else {
-                subjectArray = addend(subjectArray, newSub)
+                subjectArray.add(newSub)
                 addToPref(subjectArray, R.string.key_subject_array.toString())
                 fillListPreference(subjectList, subjectArray)
 
@@ -52,7 +56,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val addMsg = findPreference<EditTextPreference>(getString(R.string.key_add_msg))
         addMsg?.setOnPreferenceChangeListener { _, newValue ->
             val newSub = newValue as String
-            var msgArray: Array<CharSequence> = getArray(R.string.key_msg_array.toString())
+            var msgArray: MutableSet<String> = getArray(R.string.key_msg_array.toString())
             if (msgArray.contains(newSub)) {
                 Toast.makeText(
                     requireContext(), "This Message already exists, please select from below",
@@ -61,7 +65,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
                 false   // false: reject the new value.
             } else {
-                msgArray = addend(msgArray, newSub)
+                msgArray.add(newSub)
                 addToPref(msgArray, R.string.key_msg_array.toString())
                 fillListPreference(msgList, msgArray)
                 true// true: accept the new value.
@@ -71,7 +75,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     }
 
-    private fun fillListPreference(listPreference: ListPreference, array: Array<CharSequence>) {
+
+    private fun fillListPreference(listPreference: ListPreference, array: MutableSet<String>) {
         val entries: Array<CharSequence?> = arrayOfNulls(array.size)
         var i = 0
         for (category in array) {
@@ -82,32 +87,21 @@ class SettingsFragment : PreferenceFragmentCompat() {
         listPreference.entryValues = entries
     }
 
-    private fun getArray(key: String): Array<CharSequence> {
+    private fun getArray(key: String): MutableSet<String> {
         var set: MutableSet<String> = HashSet()
         set = pref.getStringSet(key, set) as MutableSet<String>
         val array: Array<String> = set.toTypedArray()
-
-        return array.map { s -> s }.toTypedArray()
+return set
     }
 
-    private fun addToPref(array: Array<CharSequence>, key: String) {
+    private fun addToPref(array: MutableSet<String>, key: String) {
 
         val editor: SharedPreferences.Editor = pref.edit()
-
-        val result: Array<String> =
-            array.map { s -> s as String }.toTypedArray()
-        val set = result.toSet()
-        Log.d("msg", array.size.toString())
-        editor.putStringSet(key, set)
+        editor.putStringSet(key, array)
         editor.apply()
         Log.d("msg", getArray(key).size.toString())
 
     }
 
-    private fun addend(arr: Array<CharSequence>, element: CharSequence): Array<CharSequence> {
-        val list: MutableList<CharSequence> = arr.toMutableList()
-        list.add(element)
-        return list.toTypedArray()
-    }
 }
 

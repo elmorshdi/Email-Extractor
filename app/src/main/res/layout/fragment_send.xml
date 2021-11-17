@@ -6,44 +6,71 @@
     android:layout_height="match_parent"
     >
 
-    <EditText
-        android:id="@+id/editText"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_margin="10dp"
-        android:hint="Put your text here "
-        android:inputType="text" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/card"
+        android:elevation="@dimen/_5sdp"
+        android:outlineSpotShadowColor="@color/colorPrimary"
+        android:translationZ="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_15sdp">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="top|start"
+            android:hint="Put your text here "
+            android:inputType="textMultiLine"
+            android:maxLines="15"
+            android:minLines="8"
+            android:scrollbars="vertical" />
+    </androidx.cardview.widget.CardView>
+
 
     <ToggleButton
         android:id="@+id/toggle_bu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editText"
+        android:layout_below="@id/card"
         android:layout_toStartOf="@id/button"
         android:layout_margin="5dp"
         android:checked="true"
         android:gravity="center"
         android:textOff="Email"
         android:textOn="Phone" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editText"
+        android:layout_below="@id/card"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:text="get emails" />
+        android:text="get" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/button"
-        android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         tools:listitem="@layout/item" />
 
 
