@@ -8,23 +8,27 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 class SendFragment : Fragment() {
     private var emailList = ArrayList<String>()
     private lateinit var arrayAdapter: ArrayAdapter<*>
-    private lateinit var mListView: ListView
+    private lateinit var mListView: RecyclerView
     private lateinit var button: Button
-    private lateinit var txt: TextView
+    private lateinit var bu: ToggleButton
     private lateinit var sub: String
     private lateinit var msg: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mListView = view.findViewById<ListView>(R.id.rv)!!
+        mListView = view.findViewById(R.id.rv)!!
         button = view.findViewById(R.id.button)
-        txt = view.findViewById(R.id.textView)
+        bu = view.findViewById(R.id.toggle_bu)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         sub = if (sharedPreferences.getBoolean(getString(R.string.key_auto_add_subject), false)) {
             sharedPreferences.getString(getString(R.string.key_select_subject), "").toString()
@@ -44,21 +48,24 @@ class SendFragment : Fragment() {
                 snack.show()
 
             } else {
-                emailList = getEmails(edtext.text.toString())
-                arrayAdapter = ArrayAdapter<String>(
-                    requireContext(),
-                    android.R.layout.simple_list_item_1,
-                    emailList
-                )
-                mListView.adapter = arrayAdapter
+                if (!bu.isChecked) {
+                    val allList = getAllEmail(edtext.text.toString())
+                   val emailsAdapter=EmailsAdapter(allList,sub,msg,this.requireContext())
+                    Log.d("msg:", " not checked ${allList.size} ")
+                    mListView.adapter = emailsAdapter
+                }else{
+                    val allList = getAllPhones(edtext.text.toString())
+
+                    val emailsAdapter=PhonesAdapter(allList, this.requireContext())
+                    Log.d("msg:", "  checked ${allList.size} ")
+                    mListView.apply {
+                        layoutManager = LinearLayoutManager(activity)
+                    } // set the custom adapter to the RecyclerView
+                    mListView.setAdapter(emailsAdapter);
+
+                }
             }
         })
-        mListView.setOnItemClickListener { parent, _, position, id ->
-            val email: String =
-                arrayAdapter.getItem(position) as String // The item that was clicked
-            sendEmail(email)
-            Log.d("msg:", email)
-        }
     }
 
     override fun onCreateView(
@@ -92,50 +99,59 @@ class SendFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun sendEmail(email: String?) {
-        val emailIntent = Intent(Intent.ACTION_SEND)
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>(email.toString()))
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, sub)
-        emailIntent.putExtra(Intent.EXTRA_TEXT, msg)
+    private fun getAllPhones(s: String): ArrayList<String> {
+        var all=ArrayList<String>()
+        val sp = " "
+        val list = s.split(sp)
+        for (it in list) {
 
-        emailIntent.type = "message/rfc822"
+            getPhone(it)?.let { it1 -> all.add(it1) }
+        }
 
-        startActivity(emailIntent)
-
+        return all
     }
 
-    private fun getEmails(s: String): ArrayList<String> {
+    private fun getAllEmail(s: String): ArrayList<String> {
+        var all=ArrayList<String>()
         val sp = " "
-        val ch: Array<Char> =
-            arrayOf('(', '"', ':', '\'', '{', '[', ')', '}', ']', '<', '>', ',', '.')
+        val EMAILREGEX =
+            "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+
         val list = s.split(sp)
-        val pattern = "@".toRegex()
-        val emails = ArrayList<String>()
         for (it in list) {
-            val chars = it.toCharArray()
-
-            if (pattern.containsMatchIn(it)) {
-                String(chars)
-                when {
-                    ch.contains(it[0]) -> {
-                        Log.d("msg:", chars[0] + "  ")
-                        chars[0] = ' '
-                        Log.d("msg:", "$it  ")
-                    }
-                }
-                when {
-                    ch.contains(chars[chars.size - 1]) -> {
-                        Log.d("msg:", chars[chars.size - 1] + " last ")
-                        chars[chars.size - 1] = ' '
-                    }
-                }
-
-                emails.add(String(chars))
-
-
-            }
+            val emailMatcher: Matcher = Pattern.compile(EMAILREGEX).matcher(it)
+            var email = ""
+            if (emailMatcher.find()) {
+                email = emailMatcher.group(0)!!
+                all.add(email)}
         }
-        return emails
+        return all
+    }
+    private fun getEmail(Document: String): String? {
+        val EMAILREGEX =
+            "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+
+        val emailMatcher: Matcher = Pattern.compile(EMAILREGEX).matcher(Document)
+        var email = ""
+        if (emailMatcher.find()) email = emailMatcher.group(0)
+
+        if ( email != "" ) {
+            return email
+       }
+        return null
+    }
+    private fun getPhone(Document: String): String? {
+         val PHONEREGEX ="(01)[0-9]{9}"
+//            "(?:(?:\\+?([1-9]|[0-9][0-9]|[0-9][0-9][0-9])\\s*(?:[.-]\\s*)?)?(?:\\(\\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\\s*\\)|([0-9][1-9]|[0-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\\s*(?:[.-]\\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\\s*(?:[.-]\\s*)?([0-9]{4})(?:\\s*(?:#|x\\.?|ext\\.?|extension)\\s*(\\d+))?"
+        //      Using regex to find emails and phone numbers===========
+        val phoneMatcher: Matcher = Pattern.compile(PHONEREGEX).matcher(Document)
+        var phone = ""
+        if (phoneMatcher.find()) phone = phoneMatcher.group(0)
+
+        if (phone != "" ) {
+            return  phone
+        }
+        return null
     }
 
 

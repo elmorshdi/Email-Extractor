@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/New/Hapd/app/src/main/res/drawable-v24/card.xml" value="0.20260416666666667" />
+        <entry key="..\:/New/Hapd/app/src/main/res/drawable/card.xml" value="0.20260416666666667" />
         <entry key="..\:/New/Hapd/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
         <entry key="..\:/New/Hapd/app/src/main/res/layout/fragment_send.xml" value="0.18645833333333334" />
         <entry key="..\:/New/Hapd/app/src/main/res/layout/item.xml" value="0.18645833333333334" />
+        <entry key="..\:/New/Hapd/app/src/main/res/layout/phone_item.xml" value="0.18645833333333334" />
         <entry key="..\:/New/Hapd/app/src/main/res/menu/chat_list_menu.xml" value="0.18645833333333334" />
         <entry key="..\:/New/Hapd/app/src/main/res/xml/account_settings.xml" value="0.1" />
         <entry key="..\:/New/Hapd/app/src/main/res/xml/settings.xml" value="0.33" />
