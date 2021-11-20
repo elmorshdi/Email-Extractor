@@ -6,13 +6,10 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupActionBarWithNavController
 import pub.devrel.easypermissions.AppSettingsDialog
 
 import android.content.Intent
+import android.util.Log
 
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -21,9 +18,17 @@ import androidx.annotation.NonNull
 import android.widget.Toast
 
 import pub.devrel.easypermissions.AfterPermissionGranted
+import java.util.*
+import android.app.AlarmManager
 
+import android.app.PendingIntent
+import android.content.Context
+import android.provider.CalendarContract
 
-
+import android.content.ContentValues
+import android.net.Uri
+import androidx.navigation.ui.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,48 +39,47 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        val bottomNavigationView :BottomNavigationView=findViewById(R.id.bottomNavigationView)
+        bottomNavigationView.setupWithNavController(navController)
         // Get NavHost and NavController
-        val navHostFrag =
-            supportFragmentManager.findFragmentById(R.id.nav_host_frag) as NavHostFragment
-        navController = navHostFrag.navController
+
 
         // Get AppBarConfiguration
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+//        appBarConfiguration = AppBarConfiguration(navController.graph)
 
         // Link ActionBar with NavController
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        setupActionBarWithNavController(navController, appBarConfiguration)
 
     }
 
-    @AfterPermissionGranted(123)
-    private fun permissions() {
-        val perms =
-            arrayOf<String>(Manifest.permission.CALL_PHONE)
-        if (EasyPermissions.hasPermissions(this, *perms)) {
-            Toast.makeText(this, "Opening camera", Toast.LENGTH_SHORT).show()
-        } else {
-            EasyPermissions.requestPermissions(
-                this, "We need permissions because this and that",
-                123, *perms
-            )
-        }
-    }
+//    private fun addRemeind() {
+//        val startMillis: Long = Calendar.getInstance().run {
+//            set(2012, 0, 19, 7, 30)
+//            timeInMillis
+//        }
+//        val endMillis: Long = Calendar.getInstance().run {
+//            set(2012, 0, 19, 8, 30)
+//            timeInMillis
+//        }
+//        val intent = Intent(Intent.ACTION_INSERT)
+//            .setData(CalendarContract.Events.CONTENT_URI)
+//            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
+//            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endMillis)
+//            .putExtra(CalendarContract.CalendarAlerts.BEGIN, true)
+//            .putExtra(CalendarContract.Events.TITLE, "Yoga")
+//            .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
+//            .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
+//            .putExtra(
+//                CalendarContract.Events.AVAILABILITY,
+//                CalendarContract.Events.AVAILABILITY_BUSY
+//            )
+//            .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com")
+//        startActivity(intent)
+//    }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
-    }
-
-    fun onPermissionsGranted(requestCode: Int, perms: List<String?>) {}
-    fun onPermissionsDenied(requestCode: Int, perms: List<String?>) {
-        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-            AppSettingsDialog.Builder(this).build().show()
-        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

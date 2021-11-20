@@ -9,9 +9,11 @@
     android:layout_marginRight="@dimen/_10sdp"
     android:layout_marginBottom="@dimen/_5sdp"
     android:background="@drawable/card"
-    android:elevation="@dimen/_5sdp"
-    android:outlineSpotShadowColor="@color/colorPrimary"
-    android:translationZ="@dimen/_5sdp"
+    android:elevation="@dimen/_8sdp"
+    android:backgroundTint="@color/white"
+    android:outlineAmbientShadowColor="@color/colorAccent"
+    android:outlineSpotShadowColor="@color/colorAccent"
+     android:translationZ="@dimen/_5sdp"
     app:cardCornerRadius="@dimen/_15sdp">
 
     <RelativeLayout

@@ -1,6 +1,7 @@
 package com.elmorshdi.hapd
 
 import android.content.Intent
+import android.content.Intent.*
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -16,22 +17,47 @@ import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import android.net.Uri
+import android.os.Parcelable
 
 
 class SendFragment : Fragment(),EasyPermissions.PermissionCallbacks {
     private lateinit var mListView: RecyclerView
     private lateinit var button: Button
-    private lateinit var bu: ToggleButton
+    private lateinit var bu1:  ToggleButton
+    private lateinit var bu2:  ToggleButton
     private lateinit var sub: String
     private lateinit var msg: String
-    val REQUEST_CODE_LOCATION_PERMISSION = 0
+    lateinit var edtext:EditText
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mListView = view.findViewById(R.id.rv)!!
         button = view.findViewById(R.id.button)
-        bu = view.findViewById(R.id.toggle_bu)
+        bu1 = view.findViewById(R.id.toggle_bu1)
+        bu2 = view.findViewById(R.id.toggle_bu2)
+        edtext = view.findViewById<EditText>(R.id.editText)
+        val intent:Intent=requireActivity().intent
+        bu1.setOnClickListener(View.OnClickListener {
+            bu2.isChecked=!bu1.isChecked
+        })
+        bu2.setOnClickListener(View.OnClickListener {
+            bu1.isChecked=!bu2.isChecked
+        })
+        when {
+            intent.action == Intent.ACTION_SEND -> {
+                if ("text/plain" == intent.type) {
+                    handleSendText(intent) // Handle text being sent
+                }
+            }
+            else -> {
+                // Handle other intents, such as being started from the home screen
+            }
+        }
+
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+
         sub = if (sharedPreferences.getBoolean(getString(R.string.key_auto_add_subject), false)) {
             sharedPreferences.getString(getString(R.string.key_select_subject), "").toString()
         } else {
@@ -44,18 +70,17 @@ class SendFragment : Fragment(),EasyPermissions.PermissionCallbacks {
         }
 
         button.setOnClickListener(View.OnClickListener {
-            val edtext = view.findViewById<EditText>(R.id.editText)
             if (edtext.text.isEmpty()) {
                 val snack = Snackbar.make(view, "Enter the Text first", Snackbar.LENGTH_LONG)
                 snack.show()
 
             } else {
-                if (!bu.isChecked) {
+                if (bu2.isChecked) {
                     val allList = getAllEmail(edtext.text.toString())
                    val emailsAdapter=EmailsAdapter(allList,sub,msg,this.requireContext())
                     Log.d("msg:", " not checked ${allList.size} ")
                     mListView.adapter = emailsAdapter
-                }else{
+                }else if (bu2.isChecked){
                     val allList = getAllPhones(edtext.text.toString())
                     val emailsAdapter=PhonesAdapter(allList, this.requireContext(),this.requireActivity())
                     Log.d("msg:", "  checked ${allList.size} ")
@@ -68,14 +93,18 @@ class SendFragment : Fragment(),EasyPermissions.PermissionCallbacks {
             }
         })
     }
-
+    private fun handleSendText(intent: Intent) {
+        intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
+            Log.d("tag",it)
+            edtext.setText(it.toString())
+            // Update UI to reflect text being shared
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_send, container, false)
     }
 
@@ -84,21 +113,7 @@ class SendFragment : Fragment(),EasyPermissions.PermissionCallbacks {
         inflater.inflate(R.menu.chat_list_menu, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when (item.itemId) {
-            R.id.action_settings -> {
-                val navHostFragment =
-                    activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_frag) as NavHostFragment
-                val navController = navHostFragment.navController
-                val action = SendFragmentDirections.actionSendFragmentToSettingsFragment()
-                navController.navigate(action)
-                return true
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
     private fun getAllEmail(s: String): ArrayList<String> {
         var all=ArrayList<String>()
         val sp = " "
@@ -133,20 +148,6 @@ class SendFragment : Fragment(),EasyPermissions.PermissionCallbacks {
         return all
     }
 
-    private fun requestPermissions() {
-        if (Utility.hasPermissions(requireContext())) {
-            return
-        }
-
-        EasyPermissions.requestPermissions(
-                this,
-                "You need to accept  permissions to use this app",
-                REQUEST_CODE_LOCATION_PERMISSION,
-                android.Manifest.permission.CALL_PHONE
-
-            )
-
-    }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         TODO("Not yet implemented")
@@ -158,6 +159,7 @@ class SendFragment : Fragment(),EasyPermissions.PermissionCallbacks {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
+
 }
 
 

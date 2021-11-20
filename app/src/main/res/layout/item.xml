@@ -9,13 +9,16 @@
     android:layout_marginRight="@dimen/_10sdp"
     android:layout_marginBottom="@dimen/_5sdp"
     android:background="@drawable/card"
-    android:elevation="@dimen/_5sdp"
-    android:outlineSpotShadowColor="@color/colorPrimary"
+    android:elevation="@dimen/_8sdp"
+    android:backgroundTint="@color/white"
+    android:outlineAmbientShadowColor="@color/colorAccent"
+    android:outlineSpotShadowColor="@color/colorAccent"
     android:translationZ="@dimen/_5sdp"
     app:cardCornerRadius="@dimen/_15sdp">
     <TextView
         android:gravity="center_horizontal"
         android:id="@+id/textView3"
+        android:textColor="@color/black"
         android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

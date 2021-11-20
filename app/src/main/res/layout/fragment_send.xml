@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/background"
     android:layout_height="match_parent"
     >
 
@@ -15,8 +16,10 @@
         android:layout_marginRight="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_5sdp"
         android:background="@drawable/card"
+        android:backgroundTint="@color/white"
         android:elevation="@dimen/_5sdp"
-        android:outlineSpotShadowColor="@color/colorPrimary"
+        android:outlineAmbientShadowColor="@color/colorAccent"
+        android:outlineSpotShadowColor="@color/colorAccent"
         android:translationZ="@dimen/_5sdp"
         app:cardCornerRadius="@dimen/_15sdp">
 
@@ -24,11 +27,14 @@
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/transparent"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="top|start"
+            android:textColorHint="@color/colorText"
+            android:textColor="@color/black"
             android:hint="Put your text here "
             android:inputType="textMultiLine"
             android:maxLines="15"
@@ -36,30 +42,52 @@
             android:scrollbars="vertical" />
     </androidx.cardview.widget.CardView>
 
-
-    <ToggleButton
-        android:id="@+id/toggle_bu"
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/card"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginStart="@dimen/_20sdp"
+    android:layout_alignParentStart="true"
+    android:background="@drawable/tap"
+    android:backgroundTint="#c5c5cc"
+    android:orientation="horizontal">
+    <androidx.appcompat.widget.AppCompatToggleButton
+        android:id="@+id/toggle_bu1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/card"
-        android:layout_toStartOf="@id/button"
-        android:layout_margin="5dp"
-        android:checked="true"
+        android:background="@drawable/toggle"
+        android:textColor="@drawable/toggle_text"
+        android:checked="false"
         android:gravity="center"
-        android:textOff="Email"
-        android:textOn="Phone" />
+        android:textOff=" Phone "
+        android:textOn=" Phone "
+        />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatToggleButton
+        android:id="@+id/toggle_bu2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/toggle"
+        android:checked="true"
+        android:textColor="@drawable/toggle_text"
+        android:gravity="center"
+        android:textOn=" Email "
+        android:textOff="Email"/>
+
+</LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/card"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:text="get" />
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="@drawable/tap"
+        android:backgroundTint="@color/black"
+        android:text=" Extract " />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
