@@ -21,6 +21,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         super.onViewCreated(view, savedInstanceState)
 
+
         fillListPreference(subjectList, getArray(R.string.key_subject_array.toString()))
 
         fillListPreference(msgList, getArray(R.string.key_msg_array.toString()))

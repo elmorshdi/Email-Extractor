@@ -84,6 +84,7 @@
         android:layout_below="@id/card"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp"
+        android:textColor="@color/white"
         android:layout_marginEnd="@dimen/_20sdp"
         android:background="@drawable/tap"
         android:backgroundTint="@color/black"
