@@ -47,9 +47,11 @@ RecyclerView.ViewHolder(inflater.inflate(R.layout.item, parent, false)) {
             if (item.done){
                 val action = ListOfAlarmsFragmentDirections.actionListOfAlarmsFragmentToAlarmViewFragment(item)
                 cardView?.findNavController()?.navigate(action)
+            }else{
+                val action = ListOfAlarmsFragmentDirections.actionListOfAlarmsFragmentToAddAlarmFragment(item.date,item)
+                cardView?.findNavController()?.navigate(action)
             }
-            val action = ListOfAlarmsFragmentDirections.actionListOfAlarmsFragmentToAddAlarmFragment(item.date,item)
-            cardView?.findNavController()?.navigate(action)
+
 
         })
      }

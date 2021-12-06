@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 <variable
@@ -15,75 +16,138 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.fragment.AlarmViewFragment">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:backgroundTint="@color/white"
+            android:elevation="@dimen/_8sdp"
+            android:translationZ="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_15sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:background="@drawable/images">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/bu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:translationZ="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_8sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/back_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:src="@drawable/ic_back"
+                        android:padding="@dimen/_5sdp"
+                        android:onClick="@{()->frag.back()}"
+                        android:tint="@color/white" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:backgroundTint="@color/transparent"
+                    android:text="@string/add_alarm"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_25sdp" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/ed_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_below="@id/action_bar"
+
             android:autofillHints="name"
-            android:hint="TITLE"
-            android:textAlignment="center"
-            android:inputType="textPersonName"
-            android:paddingStart="@dimen/_5sdp"
+            android:hint="@string/title"
             android:text="@{alarm.title}"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/card"
+            android:textSize="@dimen/_20ssp"
+            android:padding="@dimen/_10sdp"
+            android:textAlignment="center"
             android:textColor="@color/colorText"
-            android:textColorHint="#aab5c3"
-            android:textSize="@dimen/_20ssp" />
+            android:textColorHint="#aab5c3" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/ed_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ed_title"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:autofillHints="name"
-            android:hint="Summary"
+                android:autofillHints="name"
+            android:hint="@string/summary"
             android:inputType="text"
-            android:paddingStart="@dimen/_5sdp"
             android:text="@{alarm.summary}"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/card"
+            android:textSize="@dimen/_18ssp"
+            android:padding="@dimen/_10sdp"
+            android:textAlignment="textStart"
             android:textColor="@color/colorText"
-            android:textColorHint="#aab5c3"
-            android:textSize="@dimen/_18ssp" />
+            android:textColorHint="#aab5c3" />
 
         <TextView
             android:id="@+id/ed_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ed_summary"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:background="@drawable/tap"
             android:backgroundTint="#f7f7f7"
-            android:hint="Choose the time"
+            android:hint="@string/choose_the_time"
             android:text="@{alarm.time}"
-            android:textColor="@color/colorText"
-            android:textColorHint="#cccccc"
-            android:textSize="@dimen/_22ssp" />
-
-        <TextView
-            android:id="@+id/ed_note"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ed_time"
-            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:hint="notes"
-            android:paddingStart="@dimen/_5sdp"
+            android:background="@drawable/card"
+            android:textSize="@dimen/_20ssp"
+            android:padding="@dimen/_10sdp"
+            android:textAlignment="center"
+            android:textColor="@color/colorText"
+            android:textColorHint="#aab5c3" />
+
+        <EditText
+            android:id="@+id/ed_note"
+
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/card"
+             android:padding="@dimen/_10sdp"
             android:text="@{alarm.note}"
             android:textColor="@color/colorText"
             android:textColorHint="#aab5c3"
-            android:textSize="@dimen/_18ssp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ed_time"
+             android:hint="@string/notes"
+             android:textSize="@dimen/_18ssp"
+            android:autofillHints=""
+            android:inputType="textLongMessage" />
 
 
         <LinearLayout
@@ -107,19 +171,10 @@
                 android:backgroundTint="@color/colorText"
                 android:textColor="@color/white"
                 android:padding="@dimen/_10sdp"
+                android:textSize="@dimen/_18ssp"
                 android:onClick="@{()->frag.updateAlarm()}"
-                android:text="Update Note" />
+                android:text="@string/update_note" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/bu_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
-                android:onClick="@{()->frag.back()}"
-                android:background="@drawable/tap"
-                android:backgroundTint="@color/colorAccent"
-                android:textColor="@color/white"
-                android:text="Back" />
         </LinearLayout>
 
     </RelativeLayout>

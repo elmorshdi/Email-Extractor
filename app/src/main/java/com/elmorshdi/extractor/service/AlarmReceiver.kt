@@ -10,11 +10,11 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.elmorshdi.extractor.ManageAlarms
 import com.elmorshdi.extractor.R
 import com.elmorshdi.extractor.db.AlarmDisplayModel
 import com.elmorshdi.extractor.other.Constants.ALARM_ACTION
 import com.elmorshdi.extractor.other.Constants.BOOT_COMPLETED_ACTION
+import com.elmorshdi.extractor.other.ManageAlarms
 import com.elmorshdi.extractor.ui.viewModels.AddAlarmViewModel
 import com.elmorshdi.extractor.ui.viewModels.CalendarViewModel
 import com.google.gson.Gson
@@ -25,8 +25,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
  class AlarmReceiver : BroadcastReceiver()  {
-        @Inject
+    @Inject
     lateinit var viewModel: CalendarViewModel
+    @Inject
     lateinit var viewModel2: AddAlarmViewModel
 
     lateinit var model:AlarmDisplayModel
@@ -46,13 +47,15 @@ import javax.inject.Inject
             model = Gson().fromJson(intent.extras?.getString("MODEL"), AlarmDisplayModel::class.java)
 
             notifyNotification(context, summary = model.summary, title = model.title)
-            model.done=true
+            model=AlarmDisplayModel(model.date,model.time,model.title,model.summary,
+            model.note,true,model.id,model.roomId)
             viewModel2.updateAlarm(model)
+            Log.d("tag", " done $model")
 
 
 
         } else if (intent.action.equals(BOOT_COMPLETED_ACTION)) {
-            val send=ManageAlarms()
+            val send= ManageAlarms()
             Log.d("tag", "id:boot done")
 
             val list= runBlocking (Dispatchers.IO){  viewModel.getNextAlarmAsync().await() }
@@ -84,10 +87,9 @@ import javax.inject.Inject
             val build = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(summary)
-                .setSound( RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                .setSound( RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM))
                 .setSmallIcon(R.drawable.ic_extract)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-
             notify(NOTIFICATION_ID, build.build())
 
         }

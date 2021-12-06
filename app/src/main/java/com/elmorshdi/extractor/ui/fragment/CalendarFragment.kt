@@ -56,22 +56,28 @@ lateinit var binding:FragmentCalendarBinding
              if (a.date==date)dateAlarms.add(a)
          }
 
-            if (dateAlarms.isEmpty()){
+        when {
+            dateAlarms.isEmpty() -> {
                 val action = CalendarFragmentDirections.actionCalendarFragmentToAddAlarmFragment(date)
                 widget.findNavController().navigate(action)
-            }else if (dateAlarms.size==1){
+            }
+            dateAlarms.size==1 -> {
                 if (dateAlarms[0].done){
                     val action = CalendarFragmentDirections.actionCalendarFragmentToAlarmViewFragment(dateAlarms[0])
                     widget.findNavController().navigate(action)
+                }else{
+                    val action = CalendarFragmentDirections.actionCalendarFragmentToAddAlarmFragment(date,dateAlarms[0])
+                    widget.findNavController().navigate(action)
                 }
-                val action = CalendarFragmentDirections.actionCalendarFragmentToAddAlarmFragment(date,dateAlarms[0])
-                widget.findNavController().navigate(action)
-            }else if (dateAlarms.size>1){
+
+            }
+            dateAlarms.size>1 -> {
                 val array: Array<AlarmDisplayModel> = dateAlarms.toTypedArray()
 
-                val action = CalendarFragmentDirections.actionCalendarFragmentToListOfAlarmesFragment(array)
+                val action = CalendarFragmentDirections.actionCalendarFragmentToListOfAlarmsFragment(array)
                 widget.findNavController().navigate(action)
             }
+        }
 
 
     }

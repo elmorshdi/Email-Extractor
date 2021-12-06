@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.elmorshdi.extractor.adapter.AlarmAdapter
 import com.elmorshdi.extractor.databinding.FragmentListOfAlarmsBinding
 import com.elmorshdi.extractor.db.AlarmDisplayModel
@@ -14,12 +15,13 @@ import com.elmorshdi.extractor.db.AlarmDisplayModel
 class ListOfAlarmsFragment : Fragment() {
     lateinit var binding: FragmentListOfAlarmsBinding
 
-
+    lateinit var list: List<AlarmDisplayModel>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.frag = this
 
         val args = ListOfAlarmsFragmentArgs.fromBundle(requireArguments())
-        val list: List<AlarmDisplayModel> = args.list.toList()
+        list= args.list.toList()
         Log.d("tag", "listAlarms:id:${list.size}")
 
         val alarmAdapter= AlarmAdapter(list)
@@ -35,6 +37,12 @@ class ListOfAlarmsFragment : Fragment() {
 
         return binding.root
     }
-
-
+    fun back() {
+        val action = ListOfAlarmsFragmentDirections.actionListOfAlarmsFragmentToCalendarFragment()
+        binding.backArrow.findNavController().navigate(action)
+    }
+    fun addAnother(){
+        val action = ListOfAlarmsFragmentDirections.actionListOfAlarmsFragmentToAddAlarmFragment(list[0].date)
+            binding.addAnother.findNavController().navigate(action)
+    }
 }

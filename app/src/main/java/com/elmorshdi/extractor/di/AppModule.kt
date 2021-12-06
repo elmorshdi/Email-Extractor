@@ -2,11 +2,12 @@ package com.elmorshdi.extractor.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import androidx.room.Room
 import com.elmorshdi.extractor.db.AlarmDao
 import com.elmorshdi.extractor.db.Database
 import com.elmorshdi.extractor.other.Constants.DATABASE_NAME
-import com.elmorshdi.extractor.other.Constants.SHARED_PREFERENCES_NAME
+import com.elmorshdi.extractor.other.MangePref
 import com.elmorshdi.extractor.repository.MainRepository
 import com.elmorshdi.extractor.ui.viewModels.AddAlarmViewModel
 import com.elmorshdi.extractor.ui.viewModels.CalendarViewModel
@@ -45,8 +46,11 @@ object AppModule {
     fun provideAddViewModel( mainRepository: MainRepository)= AddAlarmViewModel(mainRepository)
     @Provides
     @Singleton
-    fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
-        return context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+     fun provideMangePreference(preferences: SharedPreferences)= MangePref(preferences)
+    @Provides
+    @Singleton
+    fun providePreference(@ApplicationContext context: Context): SharedPreferences {
+        return PreferenceManager.getDefaultSharedPreferences(context)
     }
 
 //    @Singleton

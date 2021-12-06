@@ -6,11 +6,13 @@
     <data>
 
     </data>
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@color/background"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card"
@@ -22,10 +24,11 @@
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@drawable/card"
             android:backgroundTint="@color/white"
-            android:elevation="@dimen/_5sdp"
-            android:outlineAmbientShadowColor="@color/colorAccent"
+            android:elevation="@dimen/_8sdp"
             android:outlineSpotShadowColor="@color/colorAccent"
-            android:translationZ="@dimen/_5sdp"
+            android:outlineAmbientShadowColor="@color/colorAccent"
+            android:shadowColor="@color/colorAccent"
+            android:translationZ="@dimen/_8sdp"
             app:cardCornerRadius="@dimen/_15sdp">
 
             <EditText
@@ -39,9 +42,8 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="top|start"
                 android:textSize="@dimen/_15ssp"
-                android:textColorHint="@color/colorText"
-                android:textColor="@color/black"
-                android:hint="Put your text here "
+                android:textColor="@color/colorPrimary"
+                android:hint="@string/put_your_text_here"
                 android:inputType="textMultiLine"
                 android:maxLines="8"
                 android:minLines="8"
@@ -58,71 +60,42 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:checked="true"
             android:textColorHint="@color/white"
-            android:textOff=" Email "
-            android:textOn=" Phone "
+            android:textOff="@string/email"
+            android:textOn="@string/phone"
             android:textSize="@dimen/_18ssp"
             android:thumb="@drawable/thumb"
             app:showText="true"
             app:track="@drawable/track" />
-        <!--<LinearLayout-->
-        <!--    android:layout_width="wrap_content"-->
-        <!--    android:layout_height="wrap_content"-->
-        <!--    android:layout_below="@id/card"-->
-        <!--    android:layout_marginTop="@dimen/_5sdp"-->
-        <!--    android:layout_marginStart="@dimen/_20sdp"-->
-        <!--    android:layout_alignParentStart="true"-->
-        <!--    android:background="@drawable/tap"-->
-        <!--    android:backgroundTint="#c5c5cc"-->
-        <!--    android:textAlignment="center"-->
-        <!--    android:orientation="horizontal">-->
-        <!--    <androidx.appcompat.widget.AppCompatToggleButton-->
-        <!--        android:id="@+id/toggle_bu1"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:background="@drawable/toggle"-->
-        <!--        android:textColor="@drawable/toggle_text"-->
-        <!--        android:checked="false"-->
-        <!--        android:textSize="@dimen/_18ssp"-->
-        <!--        android:gravity="center"-->
-        <!--        android:textOff=" Phone "-->
-        <!--        android:textOn=" Phone "-->
-        <!--        />-->
-
-        <!--    <androidx.appcompat.widget.AppCompatToggleButton-->
-        <!--        android:id="@+id/toggle_bu2"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:background="@drawable/toggle"-->
-        <!--        android:checked="true"-->
-        <!--        android:textSize="@dimen/_18ssp"-->
-
-        <!--        android:textColor="@drawable/toggle_text"-->
-        <!--        android:gravity="center"-->
-        <!--        android:textOn=" Email "-->
-        <!--        android:textOff="Email"/>-->
-
-        <!--</LinearLayout>-->
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/bu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/card"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:background="@drawable/tap"
-            android:backgroundTint="@color/colorText"
-            android:padding="@dimen/_5sdp"
-            android:text=" Extract "
-            android:textColor="@color/white"
-            android:textSize="@dimen/_18ssp" />
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:translationZ="@dimen/_8sdp"
+            app:cardCornerRadius="@dimen/_15sdp">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/extract"
+                android:padding="@dimen/_5sdp"
+                android:background="@color/transparent"
+                android:backgroundTint="@color/transparent"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp" />
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/button"
+            android:layout_below="@id/bu"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
@@ -133,4 +106,6 @@
 
 
     </RelativeLayout>
+
+</ScrollView>
 </layout>

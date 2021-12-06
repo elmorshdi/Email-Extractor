@@ -9,6 +9,7 @@
         <entry key="..\:/New/Hapd/app/src/main/res/drawable/back.xml" value="0.20260416666666667" />
         <entry key="..\:/New/Hapd/app/src/main/res/drawable/bu.xml" value="0.20260416666666667" />
         <entry key="..\:/New/Hapd/app/src/main/res/drawable/card.xml" value="0.20260416666666667" />
+        <entry key="..\:/New/Hapd/app/src/main/res/drawable/ic_back.xml" value="0.19948717948717948" />
         <entry key="..\:/New/Hapd/app/src/main/res/drawable/ic_baseline_call_24.xml" value="0.20260416666666667" />
         <entry key="..\:/New/Hapd/app/src/main/res/drawable/ic_baseline_content_paste_24.xml" value="0.20260416666666667" />
         <entry key="..\:/New/Hapd/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.20260416666666667" />
@@ -22,14 +23,14 @@
         <entry key="..\:/New/Hapd/app/src/main/res/drawable/toggle_text.xml" value="0.20260416666666667" />
         <entry key="..\:/New/Hapd/app/src/main/res/drawable/track.xml" value="0.11018518518518519" />
         <entry key="..\:/New/Hapd/app/src/main/res/drawable/whatsapp.xml" value="0.20260416666666667" />
-        <entry key="..\:/New/Hapd/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/New/Hapd/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/New/Hapd/app/src/main/res/layout/add_alarm_fragment.xml" value="0.18645833333333334" />
         <entry key="..\:/New/Hapd/app/src/main/res/layout/background.xml" value="0.18645833333333334" />
         <entry key="..\:/New/Hapd/app/src/main/res/layout/fragment_alarm_view.xml" value="0.18645833333333334" />
         <entry key="..\:/New/Hapd/app/src/main/res/layout/fragment_calendar.xml" value="0.25" />
         <entry key="..\:/New/Hapd/app/src/main/res/layout/fragment_list_of_alarmes.xml" value="0.18645833333333334" />
         <entry key="..\:/New/Hapd/app/src/main/res/layout/fragment_list_of_alarms.xml" value="0.18645833333333334" />
-        <entry key="..\:/New/Hapd/app/src/main/res/layout/fragment_send.xml" value="0.25" />
+        <entry key="..\:/New/Hapd/app/src/main/res/layout/fragment_send.xml" value="0.22" />
         <entry key="..\:/New/Hapd/app/src/main/res/layout/item.xml" value="0.18645833333333334" />
         <entry key="..\:/New/Hapd/app/src/main/res/layout/phone_item.xml" value="0.25" />
         <entry key="..\:/New/Hapd/app/src/main/res/layout/ta.xml" value="0.18645833333333334" />

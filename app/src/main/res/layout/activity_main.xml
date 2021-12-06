@@ -6,6 +6,43 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     tools:context=".ui.MainActivity">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/m_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/navHostFragment"
+        android:layout_margin="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:backgroundTint="@color/white"
+        android:elevation="@dimen/_8sdp"
+        android:translationZ="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_15sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@drawable/images">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title_Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:backgroundTint="@color/transparent"
+                android:text="@string/extractor"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_25sdp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navHostFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -15,7 +52,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/m_action_bar"
         app:layout_constraintBottom_toTopOf="@id/card"
         app:navGraph="@navigation/nav_graph" />
     <androidx.cardview.widget.CardView

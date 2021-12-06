@@ -4,17 +4,73 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="frag"
+            type="com.elmorshdi.extractor.ui.fragment.ListOfAlarmsFragment" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:backgroundTint="@color/white"
+            android:elevation="@dimen/_8sdp"
+            android:translationZ="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_15sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:background="@drawable/images">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/bu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:translationZ="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_8sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/back_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:src="@drawable/ic_back"
+                        android:padding="@dimen/_5sdp"
+                        android:onClick="@{()->frag.back()}"
+                        android:tint="@color/white" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:backgroundTint="@color/transparent"
+                    android:text="@string/alerts_this_day"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_25sdp" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_alarm"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="377dp"
+            android:layout_height="525dp"
+            android:layout_below="@id/action_bar"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
@@ -22,5 +78,30 @@
             android:layout_marginBottom="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_another"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_alarm"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:backgroundTint="@color/colorPrimary"
+            android:translationZ="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_8sdp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/add_another"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:onClick="@{()->frag.addAnother()}"
+                android:text="@string/add_another"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp" />
+
+        </androidx.cardview.widget.CardView>
+
     </RelativeLayout>
 </layout>

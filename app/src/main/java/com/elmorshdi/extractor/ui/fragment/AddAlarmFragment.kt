@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.elmorshdi.extractor.ManageAlarms
 import com.elmorshdi.extractor.databinding.AddAlarmFragmentBinding
 import com.elmorshdi.extractor.db.AlarmDisplayModel
 import com.elmorshdi.extractor.db.Time
+import com.elmorshdi.extractor.other.ManageAlarms
 import com.elmorshdi.extractor.ui.viewModels.AddAlarmViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -36,7 +36,6 @@ class AddAlarmFragment : Fragment() {
             binding.alarm = model
             binding.newAlarm.visibility = View.GONE
             binding.buAdd.visibility = View.GONE
-            binding.buBack.visibility = View.GONE
             binding.updateLiner.visibility = View.VISIBLE
             binding.buUpdate.visibility = View.VISIBLE
             binding.buDelete.visibility = View.VISIBLE
@@ -131,7 +130,7 @@ class AddAlarmFragment : Fragment() {
 
     fun back() {
         val action = AddAlarmFragmentDirections.actionAddAlarmFragmentToCalendarFragment()
-        binding.buBack.findNavController().navigate(action)
+        binding.backArrow.findNavController().navigate(action)
     }
 
     fun addAlarm() {

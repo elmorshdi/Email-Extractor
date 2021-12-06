@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.elmorshdi.extractor.ManageAlarms
 import com.elmorshdi.extractor.databinding.FragmentAlarmViewBinding
 import com.elmorshdi.extractor.db.AlarmDisplayModel
+import com.elmorshdi.extractor.other.ManageAlarms
 import com.elmorshdi.extractor.ui.viewModels.AddAlarmViewModel
 
 
@@ -63,6 +63,6 @@ class AlarmViewFragment : Fragment() {
     }
     fun back() {
         val action = AlarmViewFragmentDirections.actionAlarmViewFragmentToCalendarFragment()
-        binding.buBack.findNavController().navigate(action)
+        binding.backArrow.findNavController().navigate(action)
     }
 }

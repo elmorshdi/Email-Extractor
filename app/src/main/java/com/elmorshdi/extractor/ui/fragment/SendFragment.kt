@@ -29,8 +29,8 @@ class SendFragment : Fragment(),EasyPermissions.PermissionCallbacks {
         super.onViewCreated(view, savedInstanceState)
          val intent:Intent=requireActivity().intent
 
-        when {
-            intent.action == Intent.ACTION_SEND -> {
+        when (intent.action) {
+            Intent.ACTION_SEND -> {
                 if ("text/plain" == intent.type) {
                     handleSendText(intent) // Handle text being sent
                 }
@@ -39,7 +39,6 @@ class SendFragment : Fragment(),EasyPermissions.PermissionCallbacks {
                 // Handle other intents, such as being started from the home screen
             }
         }
-
 
 
         sub = if (sharedPreferences.getBoolean(getString(R.string.key_auto_add_subject), false)) {
