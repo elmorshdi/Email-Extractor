@@ -18,7 +18,7 @@
     <TextView
         android:gravity="center_horizontal"
         android:id="@+id/textView3"
-        android:textColor="@color/black"
+        android:textColor="@color/colorText"
         android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

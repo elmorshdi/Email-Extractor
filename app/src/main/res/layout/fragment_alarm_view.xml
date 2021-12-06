@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+<variable
+    name="alarm"
+    type="com.elmorshdi.extractor.db.AlarmDisplayModel" />
+        <variable
+            name="frag"
+            type="com.elmorshdi.extractor.ui.fragment.AlarmViewFragment" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.AlarmViewFragment">
+
+        <TextView
+            android:id="@+id/ed_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:autofillHints="name"
+            android:hint="TITLE"
+            android:textAlignment="center"
+            android:inputType="textPersonName"
+            android:paddingStart="@dimen/_5sdp"
+            android:text="@{alarm.title}"
+            android:textColor="@color/colorText"
+            android:textColorHint="#aab5c3"
+            android:textSize="@dimen/_20ssp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ed_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ed_title"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:autofillHints="name"
+            android:hint="Summary"
+            android:inputType="text"
+            android:paddingStart="@dimen/_5sdp"
+            android:text="@{alarm.summary}"
+            android:textColor="@color/colorText"
+            android:textColorHint="#aab5c3"
+            android:textSize="@dimen/_18ssp" />
+
+        <TextView
+            android:id="@+id/ed_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ed_summary"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/tap"
+            android:backgroundTint="#f7f7f7"
+            android:hint="Choose the time"
+            android:text="@{alarm.time}"
+            android:textColor="@color/colorText"
+            android:textColorHint="#cccccc"
+            android:textSize="@dimen/_22ssp" />
+
+        <TextView
+            android:id="@+id/ed_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ed_time"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:hint="notes"
+            android:paddingStart="@dimen/_5sdp"
+            android:text="@{alarm.note}"
+            android:textColor="@color/colorText"
+            android:textColorHint="#aab5c3"
+            android:textSize="@dimen/_18ssp" />
+
+
+        <LinearLayout
+            android:id="@+id/newAlarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ed_note"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bu_Add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/tap"
+                android:backgroundTint="@color/colorText"
+                android:textColor="@color/white"
+                android:padding="@dimen/_10sdp"
+                android:onClick="@{()->frag.updateAlarm()}"
+                android:text="Update Note" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bu_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:onClick="@{()->frag.back()}"
+                android:background="@drawable/tap"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/white"
+                android:text="Back" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

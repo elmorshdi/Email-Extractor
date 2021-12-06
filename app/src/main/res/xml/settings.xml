@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     >
 
     <PreferenceCategory
+        android:minHeight="48dp"
+
         android:title="@string/title_subject"
         app:iconSpaceReserved="false">
         <SwitchPreferenceCompat
@@ -13,13 +16,13 @@
             android:title="@string/title_auto_add_subject"
             app:iconSpaceReserved="false" />
         <EditTextPreference
-            android:dependency="@string/key_auto_add_subject"
             android:defaultValue="@string/defValue_subject"
+            android:dependency="@string/key_auto_add_subject"
             android:key="@string/key_add_subject"
             android:title="@string/title_add_subject"
             app:dialogTitle="@string/title_dialog_add_Subject"
             app:iconSpaceReserved="false"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="false" />
 
         <ListPreference
             android:dependency="@string/key_auto_add_subject"
@@ -32,6 +35,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:minHeight="48dp"
         android:title="@string/title_msg"
         app:iconSpaceReserved="false">
         <SwitchPreferenceCompat
@@ -41,13 +45,13 @@
             android:title="@string/title_Auto_add_msg"
             app:iconSpaceReserved="false" />
         <EditTextPreference
-            android:dependency="@string/key_auto_add_msg"
             android:defaultValue="@string/defValue_msg"
+            android:dependency="@string/key_auto_add_msg"
             android:key="@string/key_add_msg"
             android:title="@string/title_add_msg"
             app:dialogTitle="@string/title_dialog_add_msg"
             app:iconSpaceReserved="false"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="false" />
 
         <ListPreference
             android:dependency="@string/key_auto_add_msg"

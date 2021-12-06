@@ -32,7 +32,7 @@
             android:layout_marginStart="@dimen/_2sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:text="Phone"
-            android:textColor="@color/black"
+            android:textColor="@color/colorText"
             android:textSize="@dimen/_14ssp" />
 
         <ImageButton
@@ -45,8 +45,7 @@
             android:layout_marginBottom="@dimen/_13sdp"
             android:layout_toStartOf="@id/call"
             android:backgroundTint="@color/transparent"
-            android:src="@drawable/whatsapp"
-            app:tint="@android:color/holo_green_light" />
+            android:src="@drawable/whatsapp" />
 
         <ImageButton
             android:id="@+id/call"
@@ -59,7 +58,7 @@
             android:layout_marginBottom="@dimen/_13sdp"
             android:backgroundTint="@color/transparent"
             android:src="@drawable/ic_baseline_call_24"
-            app:tint="@android:color/holo_blue_bright" />
+            app:tint="@color/colorText" />
 
 
 

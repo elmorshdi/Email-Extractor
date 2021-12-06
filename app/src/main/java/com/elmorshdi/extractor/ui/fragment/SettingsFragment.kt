@@ -1,16 +1,15 @@
-package com.elmorshdi.hapd
+package com.elmorshdi.extractor.ui.fragment
 
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
+import com.elmorshdi.extractor.R
 
 
 class SettingsFragment : PreferenceFragmentCompat() {

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/sendFragment"
-        android:title="Statistics"
+        android:title="Extract"
         android:icon="@drawable/ic_extract" />
 
     <item android:id="@+id/settingsFragment"
         android:title="Settings"
         android:icon="@drawable/ic_baseline_settings_24" />
+    <item android:id="@+id/calendarFragment"
+        android:title="Calendar"
+        android:icon="@drawable/ic_baseline_calendar_today_24" />
 </menu>

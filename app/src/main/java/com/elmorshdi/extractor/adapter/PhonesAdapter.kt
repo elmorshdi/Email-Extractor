@@ -1,4 +1,4 @@
-package com.elmorshdi.hapd;
+package com.elmorshdi.extractor.adapter
 
 import android.app.Activity
 import android.content.Context
@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.elmorshdi.extractor.R
+import com.elmorshdi.extractor.other.Utility
 
 import pub.devrel.easypermissions.EasyPermissions
 import java.lang.Exception

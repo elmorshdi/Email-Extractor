@@ -8,19 +8,79 @@
 
     <fragment
         android:id="@+id/sendFragment"
-        android:name="com.elmorshdi.hapd.SendFragment"
+        android:name="com.elmorshdi.extractor.ui.fragment.SendFragment"
         android:label="Welcome"
         tools:layout="@layout/fragment_send" >
         <action
             android:id="@+id/action_sendFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_sendFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.elmorshdi.hapd.SettingsFragment"
+        android:name="com.elmorshdi.extractor.ui.fragment.SettingsFragment"
         android:label="Settings" >
+    </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.elmorshdi.extractor.ui.fragment.CalendarFragment"
+        android:label="CalendarFragment" >
         <action
-            android:id="@+id/action_settingsFragment_to_sendFragment"
-            app:destination="@id/sendFragment" />
+            android:id="@+id/action_calendarFragment_to_addAlarmFragment"
+            app:destination="@id/addAlarmFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_listOfAlarmesFragment"
+            app:destination="@id/listOfAlarmsFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_alarmViewFragment"
+            app:destination="@id/alarmViewFragment" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/addAlarmFragment"
+        android:name="com.elmorshdi.extractor.ui.fragment.AddAlarmFragment"
+        android:label="add_alarm_fragment"
+        tools:layout="@layout/add_alarm_fragment" >
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="model"
+            app:argType="com.elmorshdi.extractor.db.AlarmDisplayModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_addAlarmFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listOfAlarmsFragment"
+        android:name="com.elmorshdi.extractor.ui.fragment.ListOfAlarmsFragment"
+        android:label="fragment_list_of_alarms"
+        tools:layout="@layout/fragment_list_of_alarms" >
+        <action
+            android:id="@+id/action_listOfAlarmsFragment_to_addAlarmFragment"
+            app:destination="@id/addAlarmFragment" />
+        <argument
+            android:name="list"
+            app:argType="com.elmorshdi.extractor.db.AlarmDisplayModel[]" />
+        <action
+            android:id="@+id/action_listOfAlarmsFragment_to_alarmViewFragment"
+            app:destination="@id/alarmViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alarmViewFragment"
+        android:name="com.elmorshdi.extractor.ui.fragment.AlarmViewFragment"
+        android:label="fragment_alarm_view"
+        tools:layout="@layout/fragment_alarm_view" >
+        <argument
+            android:name="alarm"
+            app:argType="com.elmorshdi.extractor.db.AlarmDisplayModel" />
+        <action
+            android:id="@+id/action_alarmViewFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
     </fragment>
 </navigation>

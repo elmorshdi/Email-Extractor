@@ -1,7 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
 
 }
 
@@ -17,7 +20,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    buildFeatures {
+        dataBinding true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -34,18 +39,52 @@ android {
 }
 
 dependencies {
+
 // Navigation Component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-
+    // ssp&sdp
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     // Preference library - Kotlin
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation "androidx.core:core:1.7.0"
+    // Room
+    implementation "androidx.room:room-runtime:2.3.0"
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+    kapt "androidx.room:room-compiler:2.3.0"
+    implementation "androidx.room:room-ktx:2.3.0"
+    implementation "androidx.fragment:fragment-ktx:1.4.0"
+    implementation 'com.google.code.gson:gson:2.8.9'
 
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2-native-mt'
+    // Coroutine Lifecycle Scopes
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+    // Dagger Core
+    implementation "com.google.dagger:dagger:2.40"
+    kapt "com.google.dagger:dagger-compiler:2.40"
+     // Dagger Android
+    api 'com.google.dagger:dagger-android:2.40'
+    api 'com.google.dagger:dagger-android-support:2.40'
+    kapt 'com.google.dagger:dagger-android-processor:2.40'
+
+    implementation 'com.github.prolificinteractive:material-calendarview:1.4.3'
+
+    // Activity KTX for viewModels()
+    implementation "androidx.activity:activity-ktx:1.4.0"
+    implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
+
+    //Dagger - Hilt
+    implementation "com.google.dagger:hilt-android:2.39.1"
+    kapt "com.google.dagger:hilt-android-compiler:2.38.1"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

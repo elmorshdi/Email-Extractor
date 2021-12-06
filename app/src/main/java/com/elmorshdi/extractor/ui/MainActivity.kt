@@ -1,36 +1,21 @@
-package com.elmorshdi.hapd
+package com.elmorshdi.extractor.ui
 
-import android.Manifest
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupWithNavController
+import com.elmorshdi.extractor.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.AppSettingsDialog
 
-import android.content.Intent
-import android.util.Log
-
-import pub.devrel.easypermissions.EasyPermissions
-
-import androidx.annotation.NonNull
-
-import android.widget.Toast
-
-import pub.devrel.easypermissions.AfterPermissionGranted
-import java.util.*
-import android.app.AlarmManager
-
-import android.app.PendingIntent
-import android.content.Context
-import android.provider.CalendarContract
-
-import android.content.ContentValues
-import android.net.Uri
-import androidx.navigation.ui.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
-
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
