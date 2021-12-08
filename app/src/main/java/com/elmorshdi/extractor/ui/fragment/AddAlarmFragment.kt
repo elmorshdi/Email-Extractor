@@ -15,6 +15,7 @@ import com.elmorshdi.extractor.db.Time
 import com.elmorshdi.extractor.other.ManageAlarms
 import com.elmorshdi.extractor.ui.viewModels.AddAlarmViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 import javax.inject.Inject
 
 
@@ -69,7 +70,6 @@ class AddAlarmFragment : Fragment() {
             }
             else -> {
                 val send = ManageAlarms()
-                val id = send.getID(date = date, time = binding.edTime.text.toString())
 
                 val alarmViewModel = AlarmDisplayModel(
                     date = date,
@@ -77,7 +77,7 @@ class AddAlarmFragment : Fragment() {
                     summary = binding.edSummary.text.toString(),
                     time = binding.edTime.text.toString(),
                     done = false,
-                    id = id,
+                    id = model.id,
                     note = binding.edNote.text.toString(),
                     roomId = model.roomId
                 )
@@ -185,12 +185,13 @@ class AddAlarmFragment : Fragment() {
     }
 
     fun setTimeBu() {
+        val calendar = Calendar.getInstance().getTime()
         TimePickerDialog(
             context, TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                 val time = Time(hour, minute)
                 binding.edTime.text = time.timeText
-            }, 9,
-            30, false
+            }, calendar.hours,
+            calendar.minutes, false
         ).show()
     }
 

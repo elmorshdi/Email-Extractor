@@ -2,6 +2,7 @@ package com.elmorshdi.extractor.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.elmorshdi.extractor.R
 
 class EmailsAdapter(
-private val list: List<String>,
-private val sub: String,
-private val msg: String,
-private val context: Context
+    private val list: List<String>,
+    private val sharedPreferences: SharedPreferences,
+    private val context: Context
 )
 : RecyclerView.Adapter<EmailViewHolder>() {
 
@@ -25,7 +25,7 @@ private val context: Context
 
     override fun onBindViewHolder(holder: EmailViewHolder, position: Int) {
         val item: String = list[position]
-        holder.bind(item,sub,msg,context)
+        holder.bind(item,sharedPreferences,context)
     }
 
     override fun getItemCount(): Int = list.size
@@ -43,9 +43,19 @@ RecyclerView.ViewHolder(inflater.inflate(R.layout.item, parent, false)) {
        cardView = itemView.findViewById(R.id.card)
     }
 
-    fun bind(item: String, sub: String, msg: String, context: Context) {
+    fun bind(item: String, sharedPreferences: SharedPreferences, context: Context) {
         mTitleView?.text = item
         cardView?.setOnClickListener(View.OnClickListener {
+           val sub = if (sharedPreferences.getBoolean("key_auto_add_subject", false)) {
+                sharedPreferences.getString("key_select_subject", "").toString()
+            } else {
+                ""
+            }
+           val msg = if (sharedPreferences.getBoolean("key_auto_add_msg", false)) {
+                sharedPreferences.getString("key_select_msg", "").toString()
+            } else {
+                ""
+            }
             val emailIntent = Intent(Intent.ACTION_SEND)
             emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>(item.toString()))
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, sub)

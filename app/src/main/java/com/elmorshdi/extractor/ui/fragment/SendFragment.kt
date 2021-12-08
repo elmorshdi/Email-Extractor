@@ -21,9 +21,7 @@ import javax.inject.Inject
 class SendFragment : Fragment(),EasyPermissions.PermissionCallbacks {
    @Inject
    lateinit var sharedPreferences: SharedPreferences
-    private lateinit var sub: String
-    private lateinit var msg: String
-     lateinit var binding: FragmentSendBinding
+       lateinit var binding: FragmentSendBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,16 +39,7 @@ class SendFragment : Fragment(),EasyPermissions.PermissionCallbacks {
         }
 
 
-        sub = if (sharedPreferences.getBoolean(getString(R.string.key_auto_add_subject), false)) {
-            sharedPreferences.getString(getString(R.string.key_select_subject), "").toString()
-        } else {
-            ""
-        }
-        msg = if (sharedPreferences.getBoolean(getString(R.string.key_auto_add_msg), false)) {
-            sharedPreferences.getString(getString(R.string.key_select_msg), "").toString()
-        } else {
-            ""
-        }
+
 
         binding.button.setOnClickListener(View.OnClickListener {
             when {
@@ -61,13 +50,13 @@ class SendFragment : Fragment(),EasyPermissions.PermissionCallbacks {
                 }
                 !binding.toggle.isChecked -> {
                     val allList = getAllEmail(binding.editText.text.toString())
-                    val emailsAdapter= EmailsAdapter(allList,sub,msg,this.requireContext())
+                    val emailsAdapter= EmailsAdapter(allList,sharedPreferences,this.requireContext())
                     Log.d("msg:", " not checked ${allList.size} ")
                     binding.rv.adapter=emailsAdapter
                 }
                 binding.toggle.isChecked -> {
                     val allList = getAllPhones(binding.editText.text.toString())
-                    val phonesAdapter= PhonesAdapter(allList, this.requireContext(),this.requireActivity())
+                    val phonesAdapter= PhonesAdapter(allList, this.requireContext(),this.requireActivity(),sharedPreferences)
                     Log.d("msg:", "  checked ${allList.size} ")
 
                     binding.rv.adapter = phonesAdapter

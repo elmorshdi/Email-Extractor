@@ -78,6 +78,6 @@ class ManageAlarms (){
 //            set(Calendar.DAY_OF_MONTH, d[0].toInt())
 //        }
 
-        return (d[1]+d[0]+t[0]+t[1]).toInt()
+        return (d[1]+d[0]+t[0]!!+t[1]!!).toInt()
     }
 }

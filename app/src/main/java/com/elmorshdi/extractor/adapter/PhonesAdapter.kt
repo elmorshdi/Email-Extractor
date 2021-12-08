@@ -3,6 +3,7 @@ package com.elmorshdi.extractor.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -12,33 +13,27 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.elmorshdi.extractor.R
 import com.elmorshdi.extractor.other.Utility
-
 import pub.devrel.easypermissions.EasyPermissions
-import java.lang.Exception
 
 
-class PhonesAdapter(private val list: List<String>, private val context: Context, private val activity: Activity) : RecyclerView.Adapter<PhoneViewHolder>() {
-
-
-
+class PhonesAdapter(private val list: List<String>,
+                    private val context: Context,
+                    private val activity: Activity,
+                    private val sharedPreferences: SharedPreferences)
+    : RecyclerView.Adapter<PhoneViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhoneViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return PhoneViewHolder(inflater, parent)
     }
-
     override fun onBindViewHolder(holder: PhoneViewHolder, position: Int) {
         val item: String = list[position]
-        holder.bind(item,context,activity)
+        holder.bind(item,context,activity,sharedPreferences)
     }
-
     override fun getItemCount(): Int = list.size
-
 }
-
 class PhoneViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.phone_item, parent, false)) {
-
     private var phoneNum: TextView? = null
     private var btCall: ImageButton? = null
     private var btWa: ImageButton? = null
@@ -50,15 +45,24 @@ class PhoneViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     }
 
-    fun bind(item: String, contexts: Context, activity: Activity?) {
+    fun bind(
+        item: String,
+        contexts: Context,
+        activity: Activity?,
+        sharedPreferences: SharedPreferences
+    ) {
         phoneNum?.text = item
         val phone="2$item"
 
         btWa?.setOnClickListener(View.OnClickListener {
             try {
-                val text = "This is a test" // Replace with your message.
-                 val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse("http://api.whatsapp.com/send?phone=$phone&text=$text")
+               val msg = if (sharedPreferences.getBoolean( "key_auto_add_msg_wa", false)) {
+                    sharedPreferences.getString("key_select_msg_wa", "").toString()
+                } else {
+                    ""
+                }
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("http://api.whatsapp.com/send?phone=$phone&text=$msg")
                 contexts.startActivity(intent)
             } catch (e: Exception) {
                 e.printStackTrace()

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">المستخرج</string>
+    <string name="title_subject">الموضوع</string>
+    <string name="title_add_subject">إضافة الموضوع</string>
+    <string name="title_auto_add_subject">إضافة موضوع الرساله تلقائيًا</string>
+    <string name="title_dialog_select_subject">حدد الموضوع الرساله</string>
+    <string name="title_dialog_add_Subject">إضافة الموضوع</string>
+    <string name="title_msg">رسالة</string>
+    <string name="title_select_msg">حدد الرسالة</string>
+    <string name="title_add_msg">اضافة رساله</string>
+    <string name="title_Auto_add_msg">اضافة  الرساله تلقائيًا</string>
+    <string name="title_dialog_add_msg">اضافة رساله</string>
+    <string name="title_dialog_select_msg">اختار رساله</string>
+    <string name="title_msg_wa">رسالة لواتس اب</string>
+    <string name="title_select_msg_wa">حدد الرسالة</string>
+    <string name="title_add_msg_wa">أضف رسالة</string>
+    <string name="title_Auto_add_msg_wa">إضافة رسالة تلقائية إلى وتساب</string>
+    <string name="extract">"إستخراج  "</string>
+    <string name="phone">الموبيل</string>
+    <string name="email">الاميل</string>
+    <string name="put_your_text_here">ضع النص هنا</string>
+    <string name="alerts_this_day">"تنبيهات اليوم دا "</string>
+    <string name="update_note">تحديث الملاحظه</string>
+    <string name="extractor">المستخرج</string>
+    <string name="remind_me">فكرني</string>
+    <string name="delete">مسح</string>
+    <string name="add_another">اضافة اخر</string>
+    <string name="update">تحديث</string>
+    <string name="notes">ملاحظه</string>
+    <string name="choose_the_time">اختار الوقت</string>
+    <string name="summary">نبذه عن</string>
+    <string name="add_alarm">اضافة تنبيه</string>
+    <string name="title">العنوان</string>
+    <string name="title_select_subject">حدد موضوع الرساله</string>
+    <string name="defValue_msg_wa">السللام عليكم</string>
+    <string name="defValue_msg">بسم الله</string>
+    <string name="defValue_subject">الموضوع</string>
+    <string name="summary_auto_msg_wa">أضف رسالة تلقائيًا إلى WhatsApp</string>
+    <string name="summary_auto_msg">أضف رسالة تلقائيًا إلى الاميل</string>
+    <string name="summary_auto_subject">أضف موضوع الرسالة تلقائيًا إلى الاميل</string>
+    <string name="title_dialog_add_msg_wa">أضف رسالة   إلى WhatsApp</string>
+    <string name="title_dialog_select_msg_wa">حدد رسالة  إلى WhatsApp</string>
+</resources>
