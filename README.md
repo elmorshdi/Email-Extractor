@@ -9,6 +9,7 @@
 * Add notes after the interview and keep them for reading later
 ## Tools :       
 * Kotlin
+* Preference library - Kotlin
 * MVVM
 * Retrofit
 * Room database
