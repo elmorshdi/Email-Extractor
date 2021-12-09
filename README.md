@@ -11,7 +11,6 @@
 * Kotlin
 * Preference library - Kotlin
 * MVVM
-* Retrofit
 * Room database
 * viewModel  
 * Coroutines
