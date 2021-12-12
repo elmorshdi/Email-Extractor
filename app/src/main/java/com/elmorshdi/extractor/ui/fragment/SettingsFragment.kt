@@ -7,7 +7,7 @@ import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.elmorshdi.extractor.R
-import com.elmorshdi.extractor.other.MangePref
+import com.elmorshdi.extractor.other.ManagePreferences
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -18,15 +18,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private lateinit var waList: ListPreference
 
     @Inject
-    lateinit var mangePref: MangePref
+    lateinit var managePref: ManagePreferences
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
 
 
-        mangePref.fillListPreference(subjectList, mangePref.getArray(R.string.key_subject_array.toString()))
-        mangePref.fillListPreference(msgList, mangePref.getArray(R.string.key_msg_array.toString()))
-        mangePref.fillListPreference(waList, mangePref.getArray(R.string.key_msg_array_wa.toString()))
+        managePref.fillListPreference(subjectList, managePref.getArray(R.string.key_subject_array.toString()))
+        managePref.fillListPreference(msgList, managePref.getArray(R.string.key_msg_array.toString()))
+        managePref.fillListPreference(waList, managePref.getArray(R.string.key_msg_array_wa.toString()))
 
     }
 
@@ -40,14 +40,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val addSubject = findPreference<EditTextPreference>(getString(R.string.key_add_subject))
         addSubject?.setOnPreferenceChangeListener { _, newValue ->
             val newSub = newValue as String
-            val subjectArray: MutableSet<String> = mangePref.getArray(R.string.key_subject_array.toString())
+            val subjectArray: MutableSet<String> = managePref.getArray(R.string.key_subject_array.toString())
             add(subjectArray, newSub,subjectList,R.string.key_subject_array.toString())
 
         }
         val addMsg = findPreference<EditTextPreference>(getString(R.string.key_add_msg))
         addMsg?.setOnPreferenceChangeListener { _, newValue ->
             val newSub = newValue as String
-            val msgArray: MutableSet<String> = mangePref.getArray(R.string.key_msg_array.toString())
+            val msgArray: MutableSet<String> = managePref.getArray(R.string.key_msg_array.toString())
             add(msgArray, newSub,msgList,R.string.key_msg_array.toString())
 
 
@@ -55,7 +55,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val addWaMsg = findPreference<EditTextPreference>(getString(R.string.key_add_msg_wa))
         addWaMsg?.setOnPreferenceChangeListener { _, newValue ->
             val newSub = newValue as String
-            val msgWaArray: MutableSet<String> = mangePref.getArray(R.string.key_msg_array_wa.toString())
+            val msgWaArray: MutableSet<String> = managePref.getArray(R.string.key_msg_array_wa.toString())
             add(msgWaArray, newSub,waList,R.string.key_msg_array_wa.toString())
 
         }
@@ -73,8 +73,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         false   // false: reject the new value.
     } else {
         Array.add(newSub)
-        mangePref.addToPref(Array, listKey  )
-        mangePref.fillListPreference(list, Array)
+        managePref.addToPref(Array, listKey  )
+        managePref.fillListPreference(list, Array)
         true// true: accept the new value.
     }
 

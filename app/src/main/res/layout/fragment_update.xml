@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="alarm"
+            type="com.elmorshdi.extractor.db.AlarmDisplayModel" />
+        <variable
+            name="Utility"
+            type="com.elmorshdi.extractor.other.Utility" />
+
+        <variable
+            name="activity"
+            type="com.elmorshdi.extractor.ui.fragment.UpdateFragment" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.UpdateFragment">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:backgroundTint="@color/white"
+            android:elevation="@dimen/_8sdp"
+            android:translationZ="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_15sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:background="@drawable/images">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/bu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:translationZ="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_8sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/back_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:onClick="@{()->activity.back()}"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_back"
+                        android:tint="@color/white" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:backgroundTint="@color/transparent"
+                    android:text="@string/update_alarm"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_25sdp" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/action_bar"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/ed_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:autofillHints="name"
+                android:background="@drawable/card"
+                android:hint="@string/title"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:padding="@dimen/_10sdp"
+                android:text="@{alarm.title}"
+                android:textColor="@color/colorText"
+                android:textColorHint="#78909C"
+                android:textSize="@dimen/_20ssp" />
+
+            <EditText
+                android:id="@+id/ed_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:autofillHints="name"
+                android:background="@drawable/card"
+                android:hint="@string/summary"
+                android:inputType="text"
+                android:padding="@dimen/_10sdp"
+                android:text="@{alarm.summary}"
+                android:textColor="@color/colorText"
+                android:textColorHint="#78909C"
+                android:textSize="@dimen/_18ssp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/ed_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/card"
+                android:backgroundTint="#f7f7f7"
+                android:hint="@string/choose_the_time"
+                android:onClick="@{()->activity.setTimeBu()}"
+                android:padding="@dimen/_10sdp"
+                android:text="@{Utility.timeText(alarm.time)}"
+                android:textColor="@color/colorText"
+                android:textColorHint="#78909C"
+                android:textSize="@dimen/_22ssp" />
+
+            <EditText
+                android:id="@+id/ed_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:autofillHints="name"
+                android:background="@drawable/card"
+                android:hint="@string/notes"
+                android:inputType="text"
+                android:padding="@dimen/_10sdp"
+                android:text="@{alarm.note}"
+                android:textColor="@color/colorText"
+                android:textColorHint="#78909C"
+                android:textSize="@dimen/_18ssp" />
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/bu_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:background="@drawable/tap"
+                    android:backgroundTint="@color/colorText"
+                    android:onClick="@{()->activity.updateAlarm()}"
+                    android:text="@string/update"
+                    android:textColor="@color/white" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/bu_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:background="@drawable/tap"
+                    android:backgroundTint="@color/colorText"
+                    android:onClick="@{()->activity.deleteAlarm()}"
+                    android:text="@string/delete"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bu_Add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/tap"
+                android:backgroundTint="@color/colorText"
+                android:onClick="@{()->activity.addNewAlarm()}"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/add_new_alarm"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_22ssp" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

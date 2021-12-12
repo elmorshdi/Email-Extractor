@@ -6,7 +6,7 @@ import androidx.preference.ListPreference
 import javax.inject.Inject
 
 
-class MangePref
+class ManagePreferences
 @Inject constructor(private val pref: SharedPreferences){
 
 

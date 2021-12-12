@@ -8,6 +8,9 @@
     name="alarm"
     type="com.elmorshdi.extractor.db.AlarmDisplayModel" />
         <variable
+            name="Utility"
+            type="com.elmorshdi.extractor.other.Utility" />
+        <variable
             name="frag"
             type="com.elmorshdi.extractor.ui.fragment.AlarmViewFragment" />
     </data>
@@ -64,73 +67,74 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:backgroundTint="@color/transparent"
-                    android:text="@string/add_alarm"
+                    android:text="View Alarm"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_25sdp" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/ed_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/action_bar"
 
-            android:autofillHints="name"
-            android:hint="@string/title"
-            android:text="@{alarm.title}"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
+            android:autofillHints="name"
             android:background="@drawable/card"
-            android:textSize="@dimen/_20ssp"
+            android:hint="@string/title"
             android:padding="@dimen/_10sdp"
+            android:text="@{alarm.title}"
             android:textAlignment="center"
             android:textColor="@color/colorText"
-            android:textColorHint="#aab5c3" />
+            android:textColorHint="#78909C"
+            android:textSize="@dimen/_20ssp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/ed_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ed_title"
-                android:autofillHints="name"
-            android:hint="@string/summary"
-            android:inputType="text"
-            android:text="@{alarm.summary}"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
+            android:autofillHints="name"
             android:background="@drawable/card"
-            android:textSize="@dimen/_18ssp"
+            android:hint="@string/summary"
+            android:inputType="text"
             android:padding="@dimen/_10sdp"
+            android:text="@{alarm.summary}"
             android:textAlignment="textStart"
             android:textColor="@color/colorText"
-            android:textColorHint="#aab5c3" />
+            android:textColorHint="#78909C"
+            android:textSize="@dimen/_18ssp" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/ed_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ed_summary"
-            android:backgroundTint="#f7f7f7"
-            android:hint="@string/choose_the_time"
-            android:text="@{alarm.time}"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@drawable/card"
-            android:textSize="@dimen/_20ssp"
+            android:backgroundTint="#f7f7f7"
+            android:hint="@string/choose_the_time"
             android:padding="@dimen/_10sdp"
+            android:text="@{Utility.timeText(alarm.time)}"
             android:textAlignment="center"
             android:textColor="@color/colorText"
-            android:textColorHint="#aab5c3" />
+            android:textColorHint="#78909C"
+            android:textSize="@dimen/_20ssp" />
 
         <EditText
             android:id="@+id/ed_note"
+            android:textColorHint="#78909C"
 
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
@@ -140,28 +144,27 @@
              android:padding="@dimen/_10sdp"
             android:text="@{alarm.note}"
             android:textColor="@color/colorText"
-            android:textColorHint="#aab5c3"
-            android:layout_width="match_parent"
+             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ed_time"
              android:hint="@string/notes"
              android:textSize="@dimen/_18ssp"
-            android:autofillHints=""
             android:inputType="textLongMessage" />
 
 
-        <LinearLayout
-            android:id="@+id/newAlarm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ed_note"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
-            android:visibility="visible">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/newAlarm"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:visibility="visible">-->
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bu_Add"
-                android:layout_width="wrap_content"
+                    android:layout_below="@id/ed_note"
+                    android:layout_centerHorizontal="true"
+
+        android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_5sdp"
@@ -174,8 +177,24 @@
                 android:textSize="@dimen/_18ssp"
                 android:onClick="@{()->frag.updateAlarm()}"
                 android:text="@string/update_note" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bu_Add_new"
+            android:layout_below="@id/bu_Add"
+            android:layout_centerHorizontal="true"
 
-        </LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/tap"
+            android:backgroundTint="@color/colorText"
+            android:textColor="@color/white"
+            android:padding="@dimen/_10sdp"
+            android:textSize="@dimen/_18ssp"
+            android:onClick="@{()->frag.addNew()}"
+            android:text="Add New " />
 
     </RelativeLayout>
 </layout>

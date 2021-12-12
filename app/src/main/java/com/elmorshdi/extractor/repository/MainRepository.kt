@@ -6,30 +6,32 @@ import com.elmorshdi.extractor.db.AlarmDisplayModel
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
-    private val alarmDao: AlarmDao
-) {
-      suspend fun insertRun(alarmDisplayModel: AlarmDisplayModel) {
+    private val alarmDao: AlarmDao) {
+
+    suspend fun insertRun(alarmDisplayModel: AlarmDisplayModel) {
           alarmDao.insertAlarm(alarmDisplayModel)
-          Log.d("tag"," m:id:${alarmDisplayModel.id}")
-
-      }
-    suspend fun updateAlarm(a: AlarmDisplayModel) {
-        alarmDao.updateAlarm(a)
-
     }
 
-      suspend fun deleteAlarm(alarmDisplayModel: AlarmDisplayModel) {
+    suspend fun updateAlarm(a: AlarmDisplayModel) {
+        alarmDao.updateAlarm(a)
+    }
 
-          alarmDao.deleteAlarm(alarmDisplayModel.id)
-          Log.d("tag", " delete:id:${alarmDisplayModel.id}")
-      }
-    suspend fun searchByDate(s: String):List<AlarmDisplayModel> =
-        alarmDao.searchByDate("%+$s+%")
+    suspend fun updateNote(note: String,id: Int) {
+        alarmDao.updateNote(note, id)
+    }
 
-    suspend  fun getDoneAlarm ()= alarmDao.getDoneAlarm()
-    suspend  fun getAllAlarm ()= alarmDao.getAllAlarm()
-    suspend  fun getAllDate() = alarmDao.getAllDate()
+    suspend fun updateDone(id: Int) {
+        alarmDao.updateDone(id)
+        Log.d("tag","mr:id:${id}")
+
+    }
     suspend  fun getNextAlarm() = alarmDao.getNextAlarm()
+
+    suspend fun deleteAlarm(id: Int) {
+          alarmDao.deleteAlarm(id)
+    }
+
+     suspend  fun getAllAlarm ()= alarmDao.getAllAlarm()
 
 }
 

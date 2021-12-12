@@ -15,20 +15,20 @@ import com.elmorshdi.extractor.db.AlarmDisplayModel
 import com.elmorshdi.extractor.other.Constants.ALARM_ACTION
 import com.elmorshdi.extractor.other.Constants.BOOT_COMPLETED_ACTION
 import com.elmorshdi.extractor.other.ManageAlarms
-import com.elmorshdi.extractor.ui.viewModels.AddAlarmViewModel
-import com.elmorshdi.extractor.ui.viewModels.CalendarViewModel
+import com.elmorshdi.extractor.other.Utility.getCalendar
+import com.elmorshdi.extractor.ui.viewModels.AlarmViewModel
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
  class AlarmReceiver : BroadcastReceiver()  {
+
     @Inject
-    lateinit var viewModel: CalendarViewModel
-    @Inject
-    lateinit var viewModel2: AddAlarmViewModel
+    lateinit var viewModel: AlarmViewModel
 
     lateinit var model:AlarmDisplayModel
     companion object {
@@ -41,15 +41,12 @@ import javax.inject.Inject
 
         createNotificationChannel(context)
         if (intent.action.equals(ALARM_ACTION)) {
-            val title = intent.getStringExtra("TITLE")
-            val summary = intent.getStringExtra("SUMMARY")
-            Log.d("tag", "id:ALARM_ACTION")
+             Log.d("tag", "id:ALARM_ACTION")
             model = Gson().fromJson(intent.extras?.getString("MODEL"), AlarmDisplayModel::class.java)
 
             notifyNotification(context, summary = model.summary, title = model.title)
-            model=AlarmDisplayModel(model.date,model.time,model.title,model.summary,
-            model.note,true,model.id,model.roomId)
-            viewModel2.updateAlarm(model)
+            model.done=true
+            viewModel.updateDone(model.id)
             Log.d("tag", " done $model")
 
 
@@ -61,8 +58,17 @@ import javax.inject.Inject
             val list= runBlocking (Dispatchers.IO){  viewModel.getNextAlarmAsync().await() }
 
             for (a in list){
-                send.sendToSystem(a,context)
-                Log.d("tag", "id:${a.date}added again")
+               val d =getCalendar(a.time,a.date)
+               val cal =getCalendar()
+                cal.add(Calendar.DAY_OF_MONTH, -1)
+                if (d.before(cal)) {
+                    viewModel.updateDone(a.id)
+                    send.cancelAlarm(a,context)
+                } else{
+                    send.sendToSystem(a,context)
+                    Log.d("tag", "id:${a.date}added again")
+                }
+
 
             }
 

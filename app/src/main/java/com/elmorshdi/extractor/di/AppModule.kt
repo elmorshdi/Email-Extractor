@@ -7,10 +7,9 @@ import androidx.room.Room
 import com.elmorshdi.extractor.db.AlarmDao
 import com.elmorshdi.extractor.db.Database
 import com.elmorshdi.extractor.other.Constants.DATABASE_NAME
-import com.elmorshdi.extractor.other.MangePref
+import com.elmorshdi.extractor.other.ManagePreferences
 import com.elmorshdi.extractor.repository.MainRepository
-import com.elmorshdi.extractor.ui.viewModels.AddAlarmViewModel
-import com.elmorshdi.extractor.ui.viewModels.CalendarViewModel
+import com.elmorshdi.extractor.ui.viewModels.AlarmViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,15 +37,13 @@ object AppModule {
     @Provides
     fun provideMainRepository( alarmDao : AlarmDao)=MainRepository(alarmDao)
 
+
     @Singleton
     @Provides
-    fun provideViewModel( mainRepository: MainRepository)= CalendarViewModel(mainRepository)
-    @Singleton
-    @Provides
-    fun provideAddViewModel( mainRepository: MainRepository)= AddAlarmViewModel(mainRepository)
+    fun provideAddViewModel( mainRepository: MainRepository)= AlarmViewModel(mainRepository)
     @Provides
     @Singleton
-     fun provideMangePreference(preferences: SharedPreferences)= MangePref(preferences)
+     fun provideMangePreference(preferences: SharedPreferences)= ManagePreferences(preferences)
     @Provides
     @Singleton
     fun providePreference(@ApplicationContext context: Context): SharedPreferences {

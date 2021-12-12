@@ -18,20 +18,17 @@
             android:layout_centerInParent="true"
             android:visibility="gone" />
 
-        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-            android:id="@+id/Calender"
+        <com.applandeo.materialcalendarview.CalendarView
+            android:id="@+id/calendarView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            app:mcv_allowClickDaysOutsideCurrentMonth="true"
-            app:mcv_arrowColor="@color/colorAccent"
-            app:mcv_calendarMode="month"
-            app:mcv_firstDayOfWeek="saturday"
-            app:mcv_selectionColor="@color/colorAccent"
-            app:mcv_showOtherDates="all" />
+            android:layout_height="match_parent"
+            app:headerColor="@color/white"
+            app:headerLabelColor="@color/colorAccent"
+            app:todayLabelColor="@color/colorAccent"
+            app:swipeEnabled="true"
+        />
+
+
 
     </RelativeLayout>
 </layout>

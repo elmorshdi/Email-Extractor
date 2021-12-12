@@ -46,6 +46,9 @@ dependencies {
     // ssp&sdp
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.9'
+
     // Preference library - Kotlin
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'pub.devrel:easypermissions:3.0.0'
@@ -77,6 +80,11 @@ dependencies {
     // Activity KTX for viewModels()
     implementation "androidx.activity:activity-ktx:1.4.0"
     implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
+
+    implementation 'com.applandeo:material-calendar-view:1.9.0-rc03'
+    implementation 'com.applandeo:material-calendar-view:1.7.0'
+    
+    implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
 
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.39.1"

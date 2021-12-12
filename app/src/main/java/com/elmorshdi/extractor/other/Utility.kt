@@ -2,10 +2,15 @@ package com.elmorshdi.extractor.other
 
 import android.Manifest
 import android.content.Context
-import android.util.Log
+import com.elmorshdi.extractor.db.Date
+import com.elmorshdi.extractor.db.Time
+import com.elmorshdi.extractor.other.Constants.EMAILREGEX
+import com.elmorshdi.extractor.other.Constants.PHONEREGEX
 import pub.devrel.easypermissions.EasyPermissions
+import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import kotlin.collections.ArrayList
 
 object  Utility {
 
@@ -16,7 +21,6 @@ object  Utility {
     fun getAllPhones(s: String): ArrayList<String> {
         var all=ArrayList<String>()
         val sp = " "
-        val PHONEREGEX ="(01)[0-9]{9}"
         val list = s.split(sp)
         for (it in list) {
             val phoneMatcher: Matcher = Pattern.compile(PHONEREGEX).matcher(it)
@@ -30,16 +34,11 @@ object  Utility {
         return all
     }
      fun getAllEmail(s: String): ArrayList<String> {
-        var all=ArrayList<String>()
+        val all=ArrayList<String>()
         val sp = " "
-        val EMAILREGEX =
-            "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
-
         val list = s.split(sp)
         for (it in list) {
             val s=it.trim().lowercase()
-            Log.d("msg:", " not lower ${s} ")
-
             val emailMatcher: Matcher = Pattern.compile(EMAILREGEX).matcher(s)
             var email = ""
             if (emailMatcher.find()) {
@@ -47,5 +46,46 @@ object  Utility {
                 all.add(email)}
         }
         return all
+    }
+    fun timeText(time: Time): String{
+        val hour=time.hour
+        val minute=time.minute
+            val h = "%02d".format(if (hour < 12) hour else hour - 12)
+            val m = "%02d".format(minute)
+            val ampmText=if (hour < 12) "AM" else "PM"
+            return "$h:$m $ampmText"
+        }
+    fun getCalendar(
+        time: Time,
+        date: Date
+    ): Calendar {
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, time.hour)
+            set(Calendar.MINUTE, time.minute)
+            set(Calendar.YEAR, date.year)
+            set(Calendar.MONTH, date.month)
+            set(Calendar.DAY_OF_MONTH, date.day)
+
+        }
+        return calendar
+    }
+    fun getCalendar(
+        date: Date
+    ): Calendar {
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.YEAR, date.year)
+            set(Calendar.MONTH, date.month)
+            set(Calendar.DAY_OF_MONTH, date.day)
+
+        }
+        return calendar
+    }
+    fun getCalendar(
+    ): Calendar {
+        return Calendar.getInstance()
+    }
+    fun getID(d : Date, t : Time):Int{
+
+        return  getCalendar(t,d).timeInMillis.toInt()
     }
 }

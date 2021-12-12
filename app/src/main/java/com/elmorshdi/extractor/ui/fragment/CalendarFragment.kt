@@ -1,105 +1,135 @@
 package com.elmorshdi.extractor.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.applandeo.materialcalendarview.EventDay
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.elmorshdi.extractor.R
 import com.elmorshdi.extractor.databinding.FragmentCalendarBinding
 import com.elmorshdi.extractor.db.AlarmDisplayModel
 import com.elmorshdi.extractor.db.Date
-import com.elmorshdi.extractor.repository.MainRepository
-import com.elmorshdi.extractor.ui.viewModels.CalendarViewModel
-import com.prolificinteractive.materialcalendarview.*
-import com.prolificinteractive.materialcalendarview.spans.DotSpan
+import com.elmorshdi.extractor.other.Utility.getCalendar
+import com.elmorshdi.extractor.ui.viewModels.AlarmViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import java.util.*
+import java.util.Calendar.*
 import javax.inject.Inject
 
 
-@AndroidEntryPoint
-  class CalendarFragment : Fragment()   {
-    @Inject
-    lateinit var viewModel: CalendarViewModel
-    @Inject
-    lateinit var mainRepository: MainRepository
-lateinit var binding:FragmentCalendarBinding
 
+
+
+
+
+
+
+
+
+@AndroidEntryPoint
+class CalendarFragment : Fragment()   {
+    @Inject
+    lateinit var viewModel: AlarmViewModel
+    lateinit var binding:FragmentCalendarBinding
+    private lateinit var events: MutableList<EventDay>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-         val list = runBlocking (Dispatchers.IO){  viewModel.getAllAlarmAsync().await() }
-         renderCalender(list , R.color.colorAccent)
+        val  list = runBlocking (Dispatchers.IO){  viewModel.getAllAlarmAsync().await() }
 
-        binding.Calender.setOnDateChangedListener(OnDateSelectedListener { widget, date, selected ->
-             moveTo(date, widget  )
+        events = ArrayList()
+        dote(list)
 
-         })
+        binding.calendarView.setOnDayClickListener(object : OnDayClickListener {
+            override fun onDayClick(eventDay: EventDay) {
+                val clickedDayCalendar = eventDay.calendar
+                intentTo(clickedDayCalendar  )
+            }
+        })
+
 
     }
 
-    private fun moveTo(
-        d: CalendarDay,
-        widget: MaterialCalendarView
+    private fun intentTo(
+        d: Calendar,
      ) {
         binding.progress.visibility = View.VISIBLE
-      val date=Date(day =d.day, month = d.month, year = d.year ).dateText
-       var dateAlarms= arrayListOf<AlarmDisplayModel>()
-        val list= runBlocking (Dispatchers.IO){  viewModel.getAllAlarmAsync().await() }
+      val date=Date(d.get(YEAR), d.get(MONTH),   d.get(DAY_OF_MONTH) )
+       val dateAlarms= arrayListOf<AlarmDisplayModel>()
+       val list = runBlocking (Dispatchers.IO){  viewModel.getAllAlarmAsync().await() }
+
         Log.d("tag", "flies:id:${list}")
 
          for (a in list){
              if (a.date==date)dateAlarms.add(a)
+
          }
 
         when {
             dateAlarms.isEmpty() -> {
+                Log.d("tag", "dateAlarms.isEmpty()")
+
+                val cal=getCalendar()
+                cal.add(DAY_OF_MONTH, -1)
+                if (d.before(cal)) {
+                    binding.progress.visibility = View.GONE
+                    Toast.makeText(requireContext(), "The chosen date is past", Toast.LENGTH_SHORT)
+                        .show()
+                }else{
                 val action = CalendarFragmentDirections.actionCalendarFragmentToAddAlarmFragment(date)
-                widget.findNavController().navigate(action)
+                    binding.root.findNavController().navigate(action)}
+                Log.d("tag", "flies:id:${date}")
+
             }
             dateAlarms.size==1 -> {
+                Log.d("tag", "dateAlarms.size==1")
+
                 if (dateAlarms[0].done){
+                    Log.d("tag", "dateAlarms.size==1,done")
+
                     val action = CalendarFragmentDirections.actionCalendarFragmentToAlarmViewFragment(dateAlarms[0])
-                    widget.findNavController().navigate(action)
+                    binding.root.findNavController().navigate(action)
                 }else{
-                    val action = CalendarFragmentDirections.actionCalendarFragmentToAddAlarmFragment(date,dateAlarms[0])
-                    widget.findNavController().navigate(action)
+                    Log.d("tag", "dateAlarms.size==1,false")
+
+                    val action = CalendarFragmentDirections.actionCalendarFragmentToUpdateFragment( dateAlarms[0])
+                    binding.root.findNavController().navigate(action)
                 }
 
             }
             dateAlarms.size>1 -> {
+                Log.d("tag", "dateAlarms.size>1 ")
+
                 val array: Array<AlarmDisplayModel> = dateAlarms.toTypedArray()
 
                 val action = CalendarFragmentDirections.actionCalendarFragmentToListOfAlarmsFragment(array)
-                widget.findNavController().navigate(action)
+                binding.root.findNavController().navigate(action)
             }
         }
 
 
     }
 
-    private fun renderCalender(list:List<AlarmDisplayModel>, color: Int){
-        val doneDate= arrayListOf<CalendarDay>()
-        val nextDate= arrayListOf<CalendarDay>()
-
-        for (d in list) {
-            val c = d.date.split("/")
-            doneDate.add(
-                CalendarDay(c[2].toInt(), c[1].toInt(), c[0].toInt())
-            )
+    private fun dote(list: List<AlarmDisplayModel>) {
+        for (a in list) {
+            val cal =getCalendar(a.date)
+            if (a.done){
+                events.add(EventDay(cal, R.drawable.ic_alarm_done,Color.GREEN))
+            }else{
+                events.add(EventDay(cal, R.drawable.ic_alarm,Color.RED))
+            }
 
         }
+        binding.calendarView.setEvents(events)
 
-     val eventDecorator1=EventDecorator(color,doneDate)
-     Log.d("tag", "room:id:${list.size}")
-     binding.Calender.addDecorators(eventDecorator1)
-   }
-
-
+    }
 
 
     override fun onCreateView(
@@ -111,17 +141,5 @@ lateinit var binding:FragmentCalendarBinding
 
         return binding.root
     }
-    class EventDecorator(private val color: Int, dates: Collection<CalendarDay>) :
-        DayViewDecorator {
-         private val dates =HashSet(dates)
-        override fun shouldDecorate(day: CalendarDay): Boolean {
-            return dates.contains(day)
-        }
 
-        override fun decorate(view: DayViewFacade) {
-            view.addSpan(DotSpan(5F, color))
-        }
-
-
-    }
 }

@@ -11,7 +11,6 @@ data class Date(
     ): Parcelable {
 
 
-    val dateText: String get() { return "$day/$month/$year" }
 
 
 

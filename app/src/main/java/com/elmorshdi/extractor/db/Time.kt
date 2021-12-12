@@ -10,20 +10,6 @@ import kotlinx.android.parcel.Parcelize
          ): Parcelable {
 
 
-    val timeText: String
-        get() {
-//            val h = "%02d".format(if (hour < 12) hour else hour - 12)
-//            val m = "%02d".format(minute)
-
-            return "$hour:$minute"
-        }
-
-    val ampmText: String
-        get() {
-            return if (hour < 12) "AM" else "PM"
-        }
-
-
 
 
 }

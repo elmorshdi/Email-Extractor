@@ -20,4 +20,6 @@
     <string name="extract">Extract</string>
     <string name="title_auto_add_subject">Auto Add Subject</string>
     <string name="title_msg">Message</string>
+    <string name="update_alarm">Update Alarm</string>
+    <string name="add_new_alarm">Add New Alarm</string>
 </resources>

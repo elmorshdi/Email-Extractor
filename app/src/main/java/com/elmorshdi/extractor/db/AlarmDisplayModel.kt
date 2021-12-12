@@ -10,9 +10,9 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "alarm_table")
 data class AlarmDisplayModel(
     @SerializedName("date")
-    var date: String,
+    var date: Date,
     @SerializedName("time")
-    var time: String,
+    var time: Time,
     @SerializedName("title")
     var title:String,
     @SerializedName("summary")
@@ -21,11 +21,9 @@ data class AlarmDisplayModel(
     var note:String,
     @SerializedName("done")
     var done:Boolean,
+    @PrimaryKey
     @SerializedName("id")
     var id: Int,
-    @SerializedName("roomId")
-    @PrimaryKey(autoGenerate = true)
-    var roomId:Int = 0
 ):  Parcelable {
 
 

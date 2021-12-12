@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_calendarFragment_to_alarmViewFragment"
             app:destination="@id/alarmViewFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
 
 
     </fragment>
@@ -45,7 +48,7 @@
         tools:layout="@layout/add_alarm_fragment">
         <argument
             android:name="date"
-            app:argType="string" />
+            app:argType="com.elmorshdi.extractor.db.Date" />
         <argument
             android:name="model"
             android:defaultValue="@null"
@@ -72,6 +75,9 @@
         <action
             android:id="@+id/action_listOfAlarmsFragment_to_calendarFragment"
             app:destination="@id/calendarFragment" />
+        <action
+            android:id="@+id/action_listOfAlarmsFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
     </fragment>
     <fragment
         android:id="@+id/alarmViewFragment"
@@ -84,5 +90,22 @@
         <action
             android:id="@+id/action_alarmViewFragment_to_calendarFragment"
             app:destination="@id/calendarFragment" />
+        <action
+            android:id="@+id/action_alarmViewFragment_to_addAlarmFragment"
+            app:destination="@id/addAlarmFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.elmorshdi.extractor.ui.fragment.UpdateFragment"
+        android:label="UpdateFragment" >
+        <action
+            android:id="@+id/action_updateFragment_to_addAlarmFragment"
+            app:destination="@id/addAlarmFragment" />
+        <action
+            android:id="@+id/action_updateFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+        <argument
+            android:name="alarm"
+            app:argType="com.elmorshdi.extractor.db.AlarmDisplayModel" />
     </fragment>
 </navigation>
