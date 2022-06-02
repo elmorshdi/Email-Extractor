@@ -1,4 +1,4 @@
-# My Extractor
+# My Extractor [![Android Build](https://github.com/elmorshdi/Email-Extractor/actions/workflows/android_build.yml/badge.svg)](https://github.com/elmorshdi/Email-Extractor/actions/workflows/android_build.yml)
 
 ## Features:
 * Extract email addresses and phone numbers From text
@@ -18,7 +18,7 @@
 * Hilt
 * View Binding
 * Recycler View 
-### for download apk: [Download](https://drive.google.com/file/d/1F8VJuY4BUMDyXF9I35F6FCbZGqwS94qP/view?usp=sharing)
+### for download apk: Check Release or [Download](https://drive.google.com/file/d/1F8VJuY4BUMDyXF9I35F6FCbZGqwS94qP/view?usp=sharing)
 ## Screens : 
 ### extract emailes phones :
 ![Screenshot_20211208_060159](https://user-images.githubusercontent.com/53372814/145146762-1c4e0d90-d243-4588-9eb3-b2c89c619909.png)
