@@ -35,7 +35,7 @@ jobs:
           with:
             tag_name: ${{ github.ref }}
             release_name: Release ${{ github.ref }}
-            replacesArtifacts: false
+            replacesArtifacts: true
             allowUpdates: true
         - name: Upload Release APK
           id: upload_release_asset
